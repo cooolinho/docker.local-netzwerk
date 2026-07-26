@@ -1,0 +1,65 @@
+# Traefik Static Configuration
+# =============================
+# Diese Datei wird beim Start von Traefik geladen
+
+global:
+  checkNewVersion: true
+  sendAnonymousUsage: false
+
+# Entry Points (HTTP/HTTPS Eingangspunkte)
+entryPoints:
+  web:
+    address: ":80"
+    # Automatisches Upgrade auf HTTPS (später bei SSL-Aktivierung)
+    # http:
+    #   redirections:
+    #     entrypoint:
+    #       to: websecure
+    #       scheme: https
+
+  websecure:
+    address: ":443"
+    # http2:
+    #   maxConcurrentStreams: 250
+    # tls:
+    #   options: default
+
+  traefik:
+    address: ":8080"
+
+# Providers - Woher Traefik seine Konfiguration holt
+providers:
+  # Docker Provider - Traefik liest Container-Labels
+  docker:
+    endpoint: "unix:///var/run/docker.sock"
+    exposedByDefault: false
+    network: docker-local-network
+    swarmMode: false
+    useBindPortIP: false
+
+  # Datei-basierter Provider für statische Konfigurationen (optional)
+  file:
+    filename: /config/dynamic.yml
+    watch: true
+
+# Traefik API & Dashboard
+api:
+  insecure: true
+  dashboard: true
+  debug: false
+
+# Metrics (optional)
+# metrics:
+#   prometheus:
+#     addEntryPointsLabels: true
+#     addServicesLabels: true
+
+# Logging
+log:
+  level: INFO
+  format: json
+
+# Access Log
+accessLog:
+  format: json
+

@@ -1,0 +1,29 @@
+# Environment variables
+.env
+.env.local
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Docker
+docker-compose.override.yml
+
+# Traefik
+traefik/acme.json
+
+# Logs
+*.log
+logs/
+
+# Data
+data/
+volumes/
+

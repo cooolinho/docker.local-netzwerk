@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  it-tools:
+    image: corentinth/it-tools:latest
+    container_name: it-tools
+    restart: unless-stopped
+    networks:
+      - docker-local-network
+    environment:
+      - TZ=Europe/Berlin
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.it-tools.rule=Host(`it-tools.docker.local`)"
+      - "traefik.http.routers.it-tools.entrypoints=web"
+      - "traefik.http.services.it-tools.loadbalancer.server.port=80"
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+networks:
+  docker-local-network:
+    external: true
+

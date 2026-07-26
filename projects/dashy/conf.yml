@@ -1,0 +1,96 @@
+# Dashy Config - Lokales Dashboard
+# https://dashy.to/docs/configuration
+
+pageTitle: Docker Local Network
+appConfig:
+  theme: material
+  language: de
+  layout: auto
+  iconSize: medium
+  showNav: true
+  navPosition: top
+  enableFavicon: true
+  enableFontAwesome: true
+  width: 1200px
+  colCount: 4
+
+# Navigation
+nav:
+  - title: Home
+    icon: fas fa-home
+  - title: Infrastructure
+    icon: fas fa-cogs
+  - title: Projects
+    icon: fas fa-cube
+
+sections:
+  - name: Infrastructure
+    icon: fas fa-cogs
+    items:
+      - title: Traefik Dashboard
+        description: Reverse Proxy Management
+        url: http://traefik.docker.local:8080
+        icon: fas fa-project-diagram
+        target: newtab
+      - title: Portainer
+        description: Docker Management UI
+        url: http://portainer.docker.local
+        icon: fas fa-docker
+        target: newtab
+      - title: Docker Host
+        description: 192.168.178.6
+        url: http://192.168.178.6
+        icon: fas fa-server
+        target: newtab
+
+  - name: Anwendungen
+    icon: fas fa-cube
+    items:
+      - title: IT-Tools
+        description: IT-Werkzeug-Sammlung
+        url: http://it-tools.docker.local
+        icon: fas fa-tools
+        target: newtab
+      - title: Planka
+        description: Kanban Board
+        url: http://planka.docker.local
+        icon: fas fa-chart-bar
+        target: newtab
+      - title: Private Projekt 1
+        description: Dein Projekt
+        url: http://private-project-1.docker.local
+        icon: fas fa-lock
+        target: newtab
+      - title: Private Projekt 2
+        description: Dein Projekt
+        url: http://private-project-2.docker.local
+        icon: fas fa-lock
+        target: newtab
+      - title: Private Projekt 3
+        description: Dein Projekt
+        url: http://private-project-3.docker.local
+        icon: fas fa-lock
+        target: newtab
+
+  - name: Dokumentation
+    icon: fas fa-book
+    items:
+      - title: README
+        description: Setup & Konfiguration
+        url: file:///README.md
+        icon: fas fa-file-alt
+      - title: AGENTS
+        description: Rollen & Verantwortlichkeiten
+        url: file:///AGENTS.md
+        icon: fas fa-users
+      - title: Docker Compose
+        description: Offizielle Docs
+        url: https://docs.docker.com/compose/
+        icon: fab fa-docker
+        target: newtab
+      - title: Traefik
+        description: Reverse Proxy Docs
+        url: https://doc.traefik.io/
+        icon: fas fa-arrows-alt-v
+        target: newtab
+

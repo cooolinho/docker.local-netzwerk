@@ -1,0 +1,28 @@
+# Traefik Dynamic Configuration
+# ==============================
+# Diese Datei enthält optionale dynamische Routing-Konfigurationen
+# die nicht über Labels definiert sind
+
+# TLS/SSL Konfiguration
+# tls:
+#   stores:
+#     default:
+#       defaultCertificate:
+#         certFile: /path/to/cert.pem
+#         keyFile: /path/to/key.pem
+#   options:
+#     default:
+#       minVersion: VersionTLS12
+#       cipherSuites:
+#         - TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
+#         - TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
+
+# Middleware für alle Projekte
+# middlewares:
+#   security-headers:
+#     headers:
+#       customResponseHeaders:
+#         X-Frame-Options: "SAMEORIGIN"
+#         X-XSS-Protection: "1; mode=block"
+#         X-Content-Type-Options: "nosniff"
+

@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  private-project-1:
+    image: your-image:latest  # ÄNDERN: Dein Image hier eintragen
+    container_name: private-project-1
+    restart: unless-stopped
+    networks:
+      - docker-local-network
+    environment:
+      TZ: Europe/Berlin
+      # ÄNDERN: Deine Umgebungsvariablen hier eintragen
+    # volumes:
+    #   - ./data:/app/data
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.private-project-1.rule=Host(`private-project-1.docker.local`)"
+      - "traefik.http.routers.private-project-1.entrypoints=web"
+      - "traefik.http.services.private-project-1.loadbalancer.server.port=3000"  # ÄNDERN: Port anpassen
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+networks:
+  docker-local-network:
+    external: true
+

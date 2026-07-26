@@ -1,0 +1,46 @@
+version: '3.8'
+
+networks:
+  docker-local-network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 192.168.178.0/24
+
+services:
+  traefik:
+    image: traefik:v2.10
+    container_name: traefik
+    restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
+    networks:
+      - docker-local-network
+    ports:
+      - "80:80"
+      - "443:443"
+      - "${TRAEFIK_DASHBOARD_PORT}:8080"  # Traefik Dashboard
+    environment:
+      - TZ=Europe/Berlin
+      - TRAEFIK_LOG_LEVEL=${TRAEFIK_LOG_LEVEL:-INFO}
+      - TRAEFIK_LOG_FORMAT=json
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - ./traefik/traefik.yml:/traefik.yml:ro
+      - ./traefik/config:/config:ro
+      - ./traefik/acme.json:/acme.json
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.traefik.rule=Host(`traefik.${DOMAIN}`)"
+      - "traefik.http.routers.traefik.service=api@internal"
+      - "traefik.http.routers.traefik.middlewares=traefik-auth"
+      - "traefik.http.middlewares.traefik-auth.basicauth.users=${TRAEFIK_DASHBOARD_USER}:$$2y$$05$$F.ZPiVKg/yyreUGTr4dyyOZEADMkbGZSUz3g2c7qc4pzwFDyZDiFG"  # Passwort: "admin"
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+# Ein leeres Netzwerk wird später durch externe Netzwerk-Referenzen in den Projekt-Compose-Dateien verwendet
+# Dies erlaubt, dass Traefik alle Container sieht, ohne dass alle in einem monolithischen Compose-File sein müssen
+

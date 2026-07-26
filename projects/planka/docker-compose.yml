@@ -1,0 +1,58 @@
+version: '3.8'
+
+services:
+  planka-db:
+    image: postgres:15-alpine
+    container_name: planka-db
+    restart: unless-stopped
+    networks:
+      - docker-local-network
+    environment:
+      POSTGRES_DB: planka
+      POSTGRES_USER: planka
+      POSTGRES_PASSWORD: planka-password-change-me
+      TZ: Europe/Berlin
+    volumes:
+      - planka-db-data:/var/lib/postgresql/data
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+  planka:
+    image: ghcr.io/plankanban/planka:latest
+    container_name: planka
+    restart: unless-stopped
+    networks:
+      - docker-local-network
+    environment:
+      BASE_URL: http://planka.docker.local
+      DATABASE_URL: postgresql://planka:planka-password-change-me@planka-db:5432/planka
+      SECRET_KEY: planka-secret-key-change-me
+      TZ: Europe/Berlin
+    depends_on:
+      - planka-db
+    volumes:
+      - planka-user-avatars:/app/public/user-avatars
+      - planka-project-background-images:/app/public/project-background-images
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.planka.rule=Host(`planka.docker.local`)"
+      - "traefik.http.routers.planka.entrypoints=web"
+      - "traefik.http.services.planka.loadbalancer.server.port=3000"
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+volumes:
+  planka-db-data:
+  planka-user-avatars:
+  planka-project-background-images:
+
+networks:
+  docker-local-network:
+    external: true
+
