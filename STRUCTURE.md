@@ -39,7 +39,8 @@ docker.lan-netzwerk/
 └── 📁 scripts/                     # Hilfsskripte
     ├── 🔧 start-all.sh             # Startet alle Services
     ├── 🔧 stop-all.sh              # Stoppt alle Services
-    └── 🔧 status.sh                # Zeigt Status aller Services
+    ├── 🔧 status.sh                # Zeigt Status aller Services
+    └── 🔧 create-private-symlink.sh # Erstellt/loescht Symlinks fuer projects/private
 ```
 
 ---
@@ -87,6 +88,7 @@ Jedes Projekt-Verzeichnis (`dashy/`, `it-tools/`, `planka/`, etc.):
 | **start-all.sh** | Startet Traefik + alle Projekt-Services |
 | **stop-all.sh** | Stoppt alle Services sauber herunter |
 | **status.sh** | Zeigt Status aller Container & Links |
+| **create-private-symlink.sh** | Interaktives Erstellen/Loeschen von Symlinks in `projects/private` |
 
 ---
 

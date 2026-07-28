@@ -10,6 +10,7 @@ Lokale Docker-Umgebung mit Traefik als zentralem Reverse Proxy zur Verwaltung me
 - [Installation & Setup](#installation--setup)
 - [DNS-Konfiguration](#dns-konfiguration)
 - [Verwendung](#verwendung)
+- [Private Projekte per Symlink](#private-projekte-per-symlink)
 - [Traefik Dashboard](#traefik-dashboard)
 - [Fehlerbehebung](#fehlerbehebung)
 - [Sicherheit](#sicherheit)
@@ -237,6 +238,43 @@ docker-compose -f projects/dashy/docker-compose.yml restart
 docker-compose -f projects/dashy/docker-compose.yml down
 docker-compose -f projects/dashy/docker-compose.yml up -d
 ```
+
+## 🔗 Private Projekte per Symlink
+
+Der Ordner `projects/private` ist als Sammelpunkt fuer private, separat versionierte Projekte gedacht.
+Nutze dafuer das interaktive Skript `scripts/create-private-symlink.sh`.
+
+### Was das Skript macht
+
+- Erstellt Symlinks in `projects/private` auf externe Projektordner
+- Fragt interaktiv nach Symlink-Typ (`absolut` oder `relativ`), Quellpfad und Link-Name
+- Kann bestehende Ziele auf Wunsch ersetzen
+- Kann bestehende Symlinks in `projects/private` auflisten und gezielt loeschen
+
+### Bedienung
+
+```bash
+# aus dem Repo-Root
+bash scripts/create-private-symlink.sh
+```
+
+Im Menue waehlen:
+1. `Symlink erstellen`
+2. `Symlink loeschen` (zeigt alle vorhandenen Symlinks im Ordner zur Auswahl)
+
+### Optional: Zielordner ueberschreiben
+
+Standard ist `<repo>/projects/private`. Auf dem Server kannst du den Zielordner explizit setzen:
+
+```bash
+bash scripts/create-private-symlink.sh --private-dir /home/cooolinho/docker.local-netzwerk/projects/private
+
+# alternativ per Umgebungsvariable
+PRIVATE_PROJECTS_DIR=/home/cooolinho/docker.local-netzwerk/projects/private bash scripts/create-private-symlink.sh
+```
+
+Beispiel fuer den Projekt-Quellpfad waehrend der interaktiven Abfrage:
+`/home/cooolinho/projects/laravel-my-media-library`
 
 ## 📊 Traefik Dashboard
 

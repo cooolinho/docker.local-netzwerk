@@ -94,6 +94,7 @@ projects/[name]/
 | `start-all.sh` | Startet alle Services |
 | `stop-all.sh` | Stoppt alle Services |
 | `status.sh` | Zeigt Service-Status |
+| `create-private-symlink.sh` | Erstellt/loescht interaktiv Symlinks in `projects/private` |
 
 ---
 
@@ -108,6 +109,9 @@ bash scripts/stop-all.sh
 
 # Status prüfen
 bash scripts/status.sh
+
+# Private Symlinks verwalten
+bash scripts/create-private-symlink.sh
 
 # Logs anschauen
 docker-compose logs -f traefik

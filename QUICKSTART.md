@@ -131,7 +131,7 @@ Nach dem erfolgreichen Start:
 - [ ] Lies [README.md](./README.md) für detaillierte Dokumentation
 - [ ] Schau dir [AGENTS.md](./AGENTS.md) für Rollen an
 - [ ] Konfiguriere [DNS_SETUP.md](./DNS_SETUP.md) (falls nötig)
-- [ ] Füge deine privaten Projekte in `projects/` hinzu
+- [ ] Füge deine privaten Projekte in `projects/private` hinzu (z. B. via `bash scripts/create-private-symlink.sh`)
 - [ ] Aktiviere SSL/TLS für Production (siehe README)
 
 ---
@@ -165,6 +165,7 @@ docker-compose up -d
 - **In Container gehen**: `docker exec -it [container] sh`
 - **Alle stoppen**: `bash scripts/stop-all.sh`
 - **Status prüfen**: `bash scripts/status.sh`
+- **Private Symlinks verwalten**: `bash scripts/create-private-symlink.sh`
 - **Traefik Dashboard**: Sehr hilfreich für Debugging!
 
 ---
