@@ -17,7 +17,8 @@ echo -e "${BLUE}================================================${NC}"
 
 # Arbeitsverzeichnis
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-cd "$SCRIPT_DIR"
+REPO_ROOT="$( cd "$SCRIPT_DIR/.." && pwd )"
+cd "$REPO_ROOT"
 
 # 1. Prüfe, ob Netzwerk existiert
 echo -e "\n${YELLOW}[1/5] Prüfe Docker Network...${NC}"
@@ -41,10 +42,15 @@ sleep 3
 echo -e "\n${YELLOW}[3/5] Starte Projekte...${NC}"
 for project_dir in projects/*/; do
     project_name=$(basename "$project_dir")
+    if [ ! -f "$project_dir/docker-compose.yml" ]; then
+        echo -e "${YELLOW}  → $project_name (übersprungen: keine docker-compose.yml)${NC}"
+        continue
+    fi
+
     echo -e "${YELLOW}  → $project_name...${NC}"
     cd "$project_dir"
     docker-compose up -d
-    cd "$SCRIPT_DIR"
+    cd "$REPO_ROOT"
     echo -e "${GREEN}    ✓ $project_name gestartet${NC}"
 done
 
@@ -65,6 +71,7 @@ echo -e "\n${BLUE}Verfügbare Services:${NC}"
 echo -e "  🏠 Dashy:            ${GREEN}http://dashy.docker.lan${NC}"
 echo -e "  🛠️ IT-Tools:         ${GREEN}http://it-tools.docker.lan${NC}"
 echo -e "  📋 Planka:           ${GREEN}http://planka.docker.lan${NC}"
+echo -e "  📧 Roundcube:        ${GREEN}http://mail.docker.lan${NC}"
 echo -e "  🔍 Traefik Dashboard: ${GREEN}http://traefik.docker.lan${NC}"
 
 echo -e "\n${BLUE}Logs anzeigen:${NC}"

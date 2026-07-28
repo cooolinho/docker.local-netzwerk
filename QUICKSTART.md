@@ -73,6 +73,7 @@ docker ps | grep traefik
 cd projects/dashy && docker-compose up -d && cd ../..
 cd projects/it-tools && docker-compose up -d && cd ../..
 cd projects/planka && docker-compose up -d && cd ../..
+cd projects/mailserver && cp .env.example .env && docker-compose up -d && cd ../..
 
 # Option B: Shell-Script (einfacher)
 bash scripts/start-all.sh
@@ -88,6 +89,7 @@ bash scripts/start-all.sh
 | Dashy | `http://dashy.docker.lan` |
 | IT-Tools | `http://it-tools.docker.lan` |
 | Planka | `http://planka.docker.lan` |
+| Mail (Roundcube) | `http://mail.docker.lan` |
 | Portainer | `http://portainer.docker.lan` |
 
 **Fertig! 🎉** Alle Services sollten jetzt erreichbar sein.
@@ -103,6 +105,7 @@ ipconfig /flushdns
 
 # Direkt gegen AdGuard Home testen
 nslookup dashy.docker.lan 192.168.178.3
+nslookup mail.docker.lan 192.168.178.3
 
 # AdGuard Home DNS-Rewrites prüfen
 # http://192.168.178.3 → Einstellungen → DNS-Rewrites
@@ -119,6 +122,7 @@ docker-compose logs traefik  # Was sagt das Log?
 ```bash
 # Auf VM
 curl http://dashy.docker.lan  # Funktioniert lokal?
+curl http://mail.docker.lan   # Roundcube erreichbar?
 docker exec traefik curl http://dashy:80  # Kann Traefik den Container erreichen?
 ```
 
@@ -165,6 +169,7 @@ docker-compose up -d
 - **In Container gehen**: `docker exec -it [container] sh`
 - **Alle stoppen**: `bash scripts/stop-all.sh`
 - **Status prüfen**: `bash scripts/status.sh`
+- **Mailserver separat starten**: `cd projects/mailserver && docker-compose up -d`
 - **Private Symlinks verwalten**: `bash scripts/create-private-symlink.sh`
 - **Traefik Dashboard**: Sehr hilfreich für Debugging!
 

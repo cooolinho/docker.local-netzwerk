@@ -54,6 +54,13 @@ Diese Datei gibt dir einen Überblick über alle verfügbaren Dokumentationen un
 | [projects/portainer/README.md](./projects/portainer/README.md) | Docker Management | ✅ Ready |
 | [projects/dozzle/README.md](./projects/dozzle/README.md) | Echtzeit Log-Viewer | ✅ Ready |
 | [projects/logging/README.md](./projects/logging/README.md) | Loki + Promtail + Grafana (persistente Logs) | ✅ Ready |
+| [projects/mailserver/README.md](./projects/mailserver/README.md) | Mailserver-Stack mit Roundcube + MariaDB | ✅ Ready |
+
+### Projekt-Quickstarts
+
+| Projekt | Quickstart |
+|---------|------------|
+| Mailserver | [projects/mailserver/QUICKSTART.md](./projects/mailserver/QUICKSTART.md) |
 
 ---
 
@@ -118,6 +125,7 @@ bash scripts/create-private-symlink.sh
 # Logs anschauen
 docker-compose logs -f traefik
 docker-compose -f projects/dashy/docker-compose.yml logs -f
+docker-compose -f projects/mailserver/docker-compose.yml logs -f roundcube
 
  Logs im Browser (Echtzeit)
 # http://dozzle.docker.lan
@@ -130,6 +138,9 @@ docker exec -it [container-name] sh
 
 # Traefik Dashboard
 http://traefik.docker.lan
+
+# Roundcube Webmail
+http://mail.docker.lan
 ```
 
 ---
@@ -145,6 +156,7 @@ http://traefik.docker.lan
 | Portainer | http://portainer.docker.lan | portainer/portainer-ce | ✅ Setup Ready |
 | Dozzle | http://dozzle.docker.lan | amir20/dozzle | ✅ Setup Ready |
 | Grafana | http://grafana.docker.lan | grafana/grafana | ✅ Setup Ready |
+| Roundcube | http://mail.docker.lan | roundcube/roundcubemail | ✅ Setup Ready |
 
 ---
 
@@ -196,6 +208,7 @@ http://traefik.docker.lan
 - [Lissy93/Dashy](https://dashy.to/)
 - [CorentinTh/IT-Tools](https://it-tools.tech/)
 - [PlanKanban/Planka](https://planka.app/)
+- [Roundcube](https://github.com/roundcube/roundcubemail)
 
 ---
 

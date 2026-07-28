@@ -25,16 +25,8 @@ for project_dir in traefik projects/*/; do
         project_name=$(basename "$project_dir")
         echo -e "${YELLOW}$project_name:${NC}"
 
-        # Finde Container für dieses Projekt
-        if [ "$project_name" == "traefik" ]; then
-            container_name="traefik"
-        else
-            # Für Projects: Container nach dem Verzeichnisnamen suchen
-            container_names=$(docker-compose -f "$project_dir/docker-compose.yml" config --services)
-        fi
-
-        # Zeige Status
-        docker ps -a --filter "name=$project_name" --format "table {{.Names}}\t{{.Status}}\t{{.Ports}}" || true
+        # Zeige den Compose-Status des Projekts (z. B. roundcube + roundcube-db)
+        docker-compose -f "$project_dir/docker-compose.yml" ps 2>/dev/null || true
         echo ""
     fi
 done
@@ -60,6 +52,7 @@ echo -e "\n${BLUE}Quick Links:${NC}"
 echo -e "  http://dashy.docker.lan"
 echo -e "  http://it-tools.docker.lan"
 echo -e "  http://planka.docker.lan"
+echo -e "  http://mail.docker.lan"
 echo -e "  http://traefik.docker.lan"
 
 echo -e "\n${BLUE}Commands:${NC}"

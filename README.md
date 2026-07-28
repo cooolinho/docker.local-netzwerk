@@ -26,6 +26,7 @@ Diese Struktur ermöglicht es dir, mehrere Docker-Container über einen Reverse 
 - 🔍 **Traefik Dashboard**: `http://traefik.docker.lan`
 - 📋 **Dozzle (Echtzeit Log-Viewer)**: `http://dozzle.docker.lan`
 - 📊 **Grafana (Log-Suche & Dashboards)**: `http://grafana.docker.lan`
+- 📧 **Roundcube (Webmail)**: `http://mail.docker.lan`
 
 ## 🏗️ Architektur
 
@@ -72,6 +73,7 @@ Diese Struktur ermöglicht es dir, mehrere Docker-Container über einen Reverse 
 | **Traefik** | `traefik:v2.10` | `traefik.docker.lan` | 80 | Reverse Proxy Dashboard |
 | **Dozzle** | `amir20/dozzle` | `dozzle.docker.lan` | 8080 | Echtzeit Container Log-Viewer |
 | **Grafana** | `grafana/grafana` | `grafana.docker.lan` | 3000 | Log-Suche & Dashboards (Loki) |
+| **Roundcube** | `roundcube/roundcubemail` | `mail.docker.lan` | 80 | Webmail (mit MariaDB im Mailserver-Stack) |
 
 ## 🚀 Installation & Setup
 
@@ -166,6 +168,12 @@ cp .env.example .env
 nano .env    # GF_SECURITY_ADMIN_PASSWORD setzen!
 docker-compose up -d
 
+# Mailserver (Roundcube)
+cd ../mailserver
+cp .env.example .env
+# .env anpassen (IMAP/SMTP Host + DB Variablen)
+docker-compose up -d
+
 # ... usw.
 ```
 
@@ -198,6 +206,7 @@ Falls AdGuard Home nicht verfügbar ist:
 192.168.178.6  traefik.docker.lan
 192.168.178.6  dozzle.docker.lan
 192.168.178.6  grafana.docker.lan
+192.168.178.6  mail.docker.lan
 ```
 
 > ⚠️ Hosts-Datei hat keinen Wildcard-Support — neue Projekte müssen manuell eingetragen werden.
@@ -322,6 +331,7 @@ curl -u monitor-api:monitor-readonly http://traefik.docker.lan/api/http/services
 curl -u monitor-api:monitor-readonly http://traefik.docker.lan/api/http/services/it-tools@docker
 curl -u monitor-api:monitor-readonly http://traefik.docker.lan/api/http/services/planka@docker
 curl -u monitor-api:monitor-readonly http://traefik.docker.lan/api/http/services/portainer@docker
+curl -u monitor-api:monitor-readonly http://traefik.docker.lan/api/http/services/roundcube@docker
 ```
 
 ## ⚙️ Konfiguration
