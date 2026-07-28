@@ -120,7 +120,7 @@ Jedes Projekt-Verzeichnis (`dashy/`, `it-tools/`, `planka/`, etc.):
    └─ bash scripts/start-all.sh
    
 5. Testen & Logs prüfen
-   └─ http://traefik.docker.lan:8080
+   └─ http://traefik.docker.lan
 ```
 
 ### Neues Projekt hinzufügen
@@ -136,7 +136,7 @@ Jedes Projekt-Verzeichnis (`dashy/`, `it-tools/`, `planka/`, etc.):
    └─ cd projects/mein-projekt && docker-compose up -d
    
 4. DNS aktualisieren
-   └─ Hosts-Datei: 192.168.178.6  mein-projekt.docker.lan
+   └─ Dank AdGuard Wildcard *.docker.lan kein Update nötig! ✅
    
 5. Testen
    └─ http://mein-projekt.docker.lan
@@ -155,7 +155,7 @@ Jedes Projekt-Verzeichnis (`dashy/`, `it-tools/`, `planka/`, etc.):
    └─ docker exec -it [container] sh
    
 4. Traefik Dashboard nutzen
-   └─ http://traefik.docker.lan:8080
+   └─ http://traefik.docker.lan
    
 5. DNS testen
    └─ nslookup mein-projekt.docker.lan

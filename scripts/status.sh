@@ -51,7 +51,7 @@ fi
 
 echo -e "\n${BLUE}Traefik Dashboard:${NC}"
 if docker ps | grep -q traefik; then
-    echo -e "${GREEN}✓ http://traefik.docker.lan:8080${NC}"
+    echo -e "${GREEN}✓ http://traefik.docker.lan${NC}"
 else
     echo -e "${RED}✗ Traefik läuft nicht${NC}"
 fi
@@ -60,7 +60,7 @@ echo -e "\n${BLUE}Quick Links:${NC}"
 echo -e "  http://dashy.docker.lan"
 echo -e "  http://it-tools.docker.lan"
 echo -e "  http://planka.docker.lan"
-echo -e "  http://traefik.docker.lan:8080"
+echo -e "  http://traefik.docker.lan"
 
 echo -e "\n${BLUE}Commands:${NC}"
 echo -e "  Alle starten:   ${GREEN}bash scripts/start-all.sh${NC}"

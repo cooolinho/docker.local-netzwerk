@@ -65,7 +65,7 @@ echo -e "\n${BLUE}Verfügbare Services:${NC}"
 echo -e "  🏠 Dashy:            ${GREEN}http://dashy.docker.lan${NC}"
 echo -e "  🛠️ IT-Tools:         ${GREEN}http://it-tools.docker.lan${NC}"
 echo -e "  📋 Planka:           ${GREEN}http://planka.docker.lan${NC}"
-echo -e "  🔍 Traefik Dashboard: ${GREEN}http://traefik.docker.lan:8080${NC}"
+echo -e "  🔍 Traefik Dashboard: ${GREEN}http://traefik.docker.lan${NC}"
 
 echo -e "\n${BLUE}Logs anzeigen:${NC}"
 echo -e "  docker-compose logs -f traefik"

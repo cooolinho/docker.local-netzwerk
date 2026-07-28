@@ -45,7 +45,7 @@ docker ps | grep traefik
 docker-compose logs traefik
 
 # 4. Dashboard verfügbar?
-curl http://traefik.docker.lan:8080/dashboard/
+curl http://traefik.docker.lan/dashboard/
 ```
 
 #### 📊 Regelmäßige Aufgaben (täglich/wöchentlich)
@@ -58,8 +58,8 @@ docker-compose logs --tail 100 traefik
 docker network inspect docker_lan_network
 
 # Router & Services Status
-curl http://traefik.docker.lan:8080/api/http/routers
-curl http://traefik.docker.lan:8080/api/http/services
+curl http://traefik.docker.lan/api/http/routers
+curl http://traefik.docker.lan/api/http/services
 ```
 
 #### 🔄 Updates & Wartung

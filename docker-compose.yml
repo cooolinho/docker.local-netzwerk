@@ -12,7 +12,6 @@ services:
         ports:
             - "80:80"
             - "443:443"
-            - "${TRAEFIK_DASHBOARD_PORT}:8080"  # Traefik Dashboard
         environment:
             - TZ=Europe/Berlin
             - TRAEFIK_LOG_LEVEL=${TRAEFIK_LOG_LEVEL:-INFO}
@@ -25,9 +24,10 @@ services:
         labels:
             - "traefik.enable=true"
             - "traefik.http.routers.traefik.rule=Host(`traefik.${DOMAIN}`)"
+            - "traefik.http.routers.traefik.entrypoints=web"
             - "traefik.http.routers.traefik.service=api@internal"
             - "traefik.http.routers.traefik.middlewares=traefik-auth"
-            - "traefik.http.middlewares.traefik-auth.basicauth.users=${TRAEFIK_DASHBOARD_USER}:$$2y$$05$$F.ZPiVKg/yyreUGTr4dyyOZEADMkbGZSUz3g2c7qc4pzwFDyZDiFG"  # Passwort: "admin"
+            - "traefik.http.middlewares.traefik-auth.basicauth.users=${TRAEFIK_DASHBOARD_USER}:$$apr1$$395SF7/r$$BvA3aWpIyQ0RSdFXRuRUE1"
         logging:
             driver: "json-file"
             options:

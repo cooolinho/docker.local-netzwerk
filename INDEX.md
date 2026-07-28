@@ -7,7 +7,7 @@ Diese Datei gibt dir einen Überblick über alle verfügbaren Dokumentationen un
 ### 🚀 "Ich möchte schnell starten"
 1. Lies: [QUICKSTART.md](./QUICKSTART.md) (5 Min)
 2. Folge der Anleitung
-3. Öffne http://traefik.docker.lan:8080
+3. Öffne http://traefik.docker.lan
 
 ### 📖 "Ich möchte alles verstehen"
 1. Lies: [README.md](./README.md) (20-30 Min)
@@ -125,7 +125,7 @@ docker-compose -f projects/dashy/docker-compose.yml logs -f
 docker exec -it [container-name] sh
 
 # Traefik Dashboard
-http://traefik.docker.lan:8080
+http://traefik.docker.lan
 ```
 
 ---
@@ -134,7 +134,7 @@ http://traefik.docker.lan:8080
 
 | Service | URL | Image | Status |
 |---------|-----|-------|--------|
-| Traefik | http://traefik.docker.lan:8080 | traefik:v2.10 | ✅ Setup Ready |
+| Traefik | http://traefik.docker.lan | traefik:v2.10 | ✅ Setup Ready |
 | Dashy | http://dashy.docker.lan | lissy93/dashy | ✅ Setup Ready |
 | IT-Tools | http://it-tools.docker.lan | corentinth/it-tools | ✅ Setup Ready |
 | Planka | http://planka.docker.lan | ghcr.io/plankanban/planka | ✅ Setup Ready |
@@ -148,7 +148,7 @@ http://traefik.docker.lan:8080
 ## ✅ Checkliste für Neulinge
 
 - [ ] **QUICKSTART.md** gelesen? (5 Min)
-- [ ] **DNS konfiguriert**? (DNS_SETUP.md)
+- [ ] **DNS konfiguriert**? (AdGuard Home → DNS-Rewrites: `*.docker.lan` → `192.168.178.6`)
 - [ ] **Docker Network erstellt**? (`docker network create docker_lan_network`)
 - [ ] **Traefik gestartet**? (`docker-compose up -d`)
 - [ ] **Erstes Projekt funktioniert**? (http://dashy.docker.lan)
@@ -226,7 +226,7 @@ Diese Dokumentation sollte dir alles bieten, was du brauchst. Viel Erfolg bei de
 
 ---
 
-**Zuletzt aktualisiert**: 2024-07-26  
+**Zuletzt aktualisiert**: 2026-07-28  
 **Version**: 1.0  
 **Status**: ✅ Production Ready
 

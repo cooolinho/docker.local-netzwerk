@@ -11,25 +11,34 @@ Dieses Dokument hilft dir, die Docker Local Network Umgebung in 5 Minuten zum La
 
 ## ⚡ 5 Schritte zum Start
 
-### 1️⃣ DNS konfigurieren (2 Min)
+### 1️⃣ DNS konfigurieren via AdGuard Home (2 Min)
 
-**Auf deinem Windows Host:**
+**AdGuard Home** läuft unter `http://192.168.178.3` und übernimmt das DNS für das gesamte Netzwerk.
 
-1. Öffne `C:\Windows\System32\drivers\etc\hosts` als Administrator
-2. Trage am Ende folgende Zeilen ein:
-```
-192.168.178.6  docker.lan
-192.168.178.6  dashy.docker.lan
-192.168.178.6  it-tools.docker.lan
-192.168.178.6  planka.docker.lan
-192.168.178.6  portainer.docker.lan
-192.168.178.6  traefik.docker.lan
-```
-3. Speichern (Strg+S)
-4. PowerShell als Administrator öffnen:
+1. Öffne `http://192.168.178.3` im Browser
+2. Navigiere zu **Einstellungen** → **DNS-Einstellungen** → **DNS-Rewrites**
+3. Klicke **"DNS-Rewrite hinzufügen"** und füge folgenden Eintrag hinzu:
+
+   | Domain | Antwort |
+   |--------|---------|
+   | `*.docker.lan` | `192.168.178.6` |
+
+4. Nochmals **"DNS-Rewrite hinzufügen"**:
+
+   | Domain | Antwort |
+   |--------|---------|
+   | `docker.lan` | `192.168.178.6` |
+
+5. Sicherstellen, dass AdGuard Home als DNS-Server genutzt wird (Router oder PC-Netzwerkeinstellungen)
+6. DNS-Cache leeren:
 ```powershell
 ipconfig /flushdns
 ```
+
+> 💡 Dank Wildcard `*.docker.lan` sind **alle** Subdomains automatisch erreichbar —
+> neue Projekte brauchen **keinen** neuen DNS-Eintrag!
+
+➡️ Detaillierte Anleitung: [DNS_SETUP.md](./DNS_SETUP.md)
 
 ### 2️⃣ SSH zur VM verbinden (0,5 Min)
 
@@ -75,7 +84,7 @@ bash scripts/start-all.sh
 
 | Service | URL |
 |---------|-----|
-| Dashboard | `http://traefik.docker.lan:8080` |
+| Dashboard | `http://traefik.docker.lan` |
 | Dashy | `http://dashy.docker.lan` |
 | IT-Tools | `http://it-tools.docker.lan` |
 | Planka | `http://planka.docker.lan` |
@@ -89,9 +98,14 @@ bash scripts/start-all.sh
 
 ### ❌ "Kann Host nicht auflösen"
 ```powershell
-# Auf Windows Host
+# DNS Cache leeren
 ipconfig /flushdns
-nslookup dashy.docker.lan
+
+# Direkt gegen AdGuard Home testen
+nslookup dashy.docker.lan 192.168.178.3
+
+# AdGuard Home DNS-Rewrites prüfen
+# http://192.168.178.3 → Einstellungen → DNS-Rewrites
 ```
 
 ### ❌ "Connection refused"
@@ -137,8 +151,7 @@ cd projects/mein-projekt
 # 3. Starten
 docker-compose up -d
 
-# 4. In Hosts-Datei hinzufügen
-# 192.168.178.6  mein-projekt.docker.lan
+# 4. Kein DNS-Update nötig! Dank AdGuard Wildcard *.docker.lan sofort erreichbar
 
 # 5. Testen
 # Öffne http://mein-projekt.docker.lan

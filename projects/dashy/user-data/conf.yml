@@ -25,7 +25,7 @@ sections:
     items:
       - title: Traefik Dashboard
         description: Reverse Proxy Management
-        url: http://traefik.docker.lan:8080
+        url: http://traefik.docker.lan
         icon: fas fa-project-diagram
         target: newtab
         id: infra_traefik

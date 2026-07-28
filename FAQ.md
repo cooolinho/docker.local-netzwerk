@@ -84,7 +84,7 @@ Siehe [README.md - Sicherheit](./README.md#-sicherheit) für Details.
 5. **Lokal auf VM getestet?**
    ```bash
    curl http://dashy:80  # oder die korrekte Port
-   curl http://traefik.docker.lan:8080/dashboard/
+   curl http://traefik.docker.lan/dashboard/
    ```
 
 ---

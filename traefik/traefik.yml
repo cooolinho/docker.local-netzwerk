@@ -44,7 +44,7 @@ providers:
 
 # Traefik API & Dashboard
 api:
-  insecure: true
+  insecure: false   # Dashboard nur über Router (traefik.docker.lan), nicht direkt über Port 8080
   dashboard: true
   debug: false
 

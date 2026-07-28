@@ -23,7 +23,7 @@ Diese Struktur ermöglicht es dir, mehrere Docker-Container über einen Reverse 
 - 📋 **Planka (Kanban Board)**: `http://planka.docker.lan`
 - 🐋 **Portainer (Docker Management)**: `http://portainer.docker.lan`
 - 🔧 **Private Projekte**: `http://private-project-1.docker.lan` usw.
-- 🔍 **Traefik Dashboard**: `http://traefik.docker.lan:8080`
+- 🔍 **Traefik Dashboard**: `http://traefik.docker.lan`
 
 ## 🏗️ Architektur
 
@@ -68,7 +68,7 @@ Diese Struktur ermöglicht es dir, mehrere Docker-Container über einen Reverse 
 | **Planka** | `ghcr.io/plankanban/planka` | `planka.docker.lan` | 3000 | Kanban Board |
 | **Portainer** | `portainer/portainer-ce` | `portainer.docker.lan` | 9000 | Docker Management UI |
 | **Private Projekt 1-3** | Custom | `private-project-*.docker.lan` | Custom | Deine Projekte |
-| **Traefik** | `traefik:v2.10` | `traefik.docker.lan:8080` | 8080 | Reverse Proxy Dashboard |
+| **Traefik** | `traefik:v2.10` | `traefik.docker.lan` | 80 | Reverse Proxy Dashboard |
 
 ## 🚀 Installation & Setup
 
@@ -76,7 +76,7 @@ Diese Struktur ermöglicht es dir, mehrere Docker-Container über einen Reverse 
 
 - Docker & Docker Compose auf VM installiert
 - Netzwerkverbindung zwischen Host und VM
-- Windows Host (für Hosts-Datei-Konfiguration)
+- Windows Host (für AdGuard Home DNS-Konfiguration)
 
 ### 1. Repository klonen/einrichten
 
@@ -95,29 +95,23 @@ TRAEFIK_DASHBOARD_USER=admin                  # Dashboard Benutzername
 TRAEFIK_DASHBOARD_PASSWORD=admin              # Dashboard Passwort
 ```
 
-### 3. DNS-Konfiguration (Windows Host)
+### 3. DNS-Konfiguration (AdGuard Home)
 
-Bearbeite `C:\Windows\System32\drivers\etc\hosts` als Administrator:
+DNS wird über **AdGuard Home** (192.168.178.3) mit Wildcard-Einträgen verwaltet.
+Ein einziger Eintrag macht alle Subdomains automatisch verfügbar:
 
-```hosts
-# Docker Local Network
-192.168.178.6  docker.lan
-192.168.178.6  dashy.docker.lan
-192.168.178.6  it-tools.docker.lan
-192.168.178.6  planka.docker.lan
-192.168.178.6  portainer.docker.lan
-192.168.178.6  private-project-1.docker.lan
-192.168.178.6  private-project-2.docker.lan
-192.168.178.6  private-project-3.docker.lan
-192.168.178.6  traefik.docker.lan
-```
+| Domain | IP | Zweck |
+|--------|-----|-------|
+| `*.docker.lan` | `192.168.178.6` | Alle Subdomains (Wildcard) |
+| `docker.lan` | `192.168.178.6` | Root-Domain |
 
-**Oder nutze einen lokalen DNS-Server** (z.B. auf deinem Docker Host) mit Wildcard-Einträgen:
+**Einrichten in AdGuard Home:**
+1. Öffne `http://192.168.178.3`
+2. Navigiere zu **Einstellungen** → **DNS-Einstellungen** → **DNS-Rewrites**
+3. Füge `*.docker.lan` → `192.168.178.6` hinzu
+4. Füge `docker.lan` → `192.168.178.6` hinzu
 
-```dns
-*.docker.lan  A  192.168.178.6
-docker.lan    A  192.168.178.6
-```
+➡️ Detaillierte Anleitung: [DNS_SETUP.md](./DNS_SETUP.md)
 
 ### 4. Externes Netzwerk erstellen (auf Docker Host)
 
@@ -163,35 +157,34 @@ docker-compose up -d
 
 ## 🌐 DNS-Konfiguration
 
-### Option 1: Windows Hosts-Datei (einfach, manuell)
+### AdGuard Home (empfohlen — Wildcard DNS)
 
-1. Öffne Editor als Administrator
-2. Öffne: `C:\Windows\System32\drivers\etc\hosts`
-3. Füge die Einträge am Ende hinzu (siehe oben)
-4. Speichern
+DNS wird zentral über **AdGuard Home** (192.168.178.3) verwaltet.
 
-**Vorteil**: Einfach  
-**Nachteil**: Manuelle Verwaltung bei neuen Projekten
+**Einrichten:**
+1. Öffne `http://192.168.178.3`
+2. **Einstellungen** → **DNS-Einstellungen** → **DNS-Rewrites**
+3. Eintrag 1: `*.docker.lan` → `192.168.178.6`
+4. Eintrag 2: `docker.lan` → `192.168.178.6`
 
-### Option 2: Lokaler DNS-Server (advanced, dynamisch)
+**Vorteil**: Wildcard-Eintrag — neue Projekte sind sofort erreichbar, kein manuelles DNS-Update!
 
-Nutze ein Tool wie:
-- **dnsmasq** (Linux)
-- **CoreDNS** (Docker Container)
-- **Unbound** (alle Plattformen)
+Detaillierte Anleitung: [DNS_SETUP.md](./DNS_SETUP.md)
 
-Beispiel mit dnsmasq in Docker:
+### Fallback: Windows Hosts-Datei
 
-```yaml
-dns-server:
-  image: jpillora/dnsmasq:latest
-  ports:
-    - "53:53/udp"
-  volumes:
-    - ./dnsmasq.conf:/etc/dnsmasq.conf
-  networks:
-    - docker_lan_network
+Falls AdGuard Home nicht verfügbar ist:
+
+```hosts
+192.168.178.6  docker.lan
+192.168.178.6  dashy.docker.lan
+192.168.178.6  it-tools.docker.lan
+192.168.178.6  planka.docker.lan
+192.168.178.6  portainer.docker.lan
+192.168.178.6  traefik.docker.lan
 ```
+
+> ⚠️ Hosts-Datei hat keinen Wildcard-Support — neue Projekte müssen manuell eingetragen werden.
 
 ## 🔧 Verwendung
 
@@ -229,10 +222,7 @@ dns-server:
    docker-compose up -d
    ```
 
-4. **DNS aktualisieren** (Hosts-Datei):
-   ```hosts
-   192.168.178.6  mein-projekt.docker.lan
-   ```
+4. **DNS aktualisieren** — dank AdGuard Home Wildcard **nicht nötig**! Neues Projekt ist sofort unter `http://mein-projekt.docker.lan` erreichbar.
 
 ### Container verwalten
 
@@ -253,7 +243,7 @@ docker-compose -f projects/dashy/docker-compose.yml up -d
 
 ## 📊 Traefik Dashboard
 
-**URL**: `http://traefik.docker.lan:8080`
+**URL**: `http://traefik.docker.lan`
 
 **Anmeldedaten**:
 - Benutzername: `admin`
@@ -328,12 +318,14 @@ Nutze in Labels:
 
 ### DNS-Fehler
 
-1. **Hosts-Datei nicht aktualisiert**:
-   - Admin-Rechte?
-   - Richtige IP-Adresse?
-   - nslookup Test: `nslookup dashy.docker.lan`
-
-2. **DNS Cache leeren** (Windows):
+1. **AdGuard Home DNS-Rewrite korrekt?**
+   - Öffne `http://192.168.178.3` → DNS-Rewrites prüfen
+   - `*.docker.lan` → `192.168.178.6` vorhanden?
+2. **Richtigen DNS-Server nutzen?**
+   ```powershell
+   nslookup dashy.docker.lan 192.168.178.3
+   ```
+3. **DNS Cache leeren** (Windows):
    ```powershell
    ipconfig /flushdns
    ```
@@ -390,7 +382,7 @@ Siehe `AGENTS.md` für Rollen und Verantwortlichkeiten.
 
 ---
 
-**Zuletzt aktualisiert**: 2024-07-26  
+**Zuletzt aktualisiert**: 2026-07-28  
 **Traefik Version**: v2.10  
 **Docker Compose Version**: 3.8
 
