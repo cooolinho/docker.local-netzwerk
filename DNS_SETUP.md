@@ -170,9 +170,6 @@ Falls AdGuard Home nicht verfügbar ist (z.B. Wartung), kannst du temporär die 
 192.168.178.6  planka.docker.lan
 192.168.178.6  portainer.docker.lan
 192.168.178.6  traefik.docker.lan
-192.168.178.6  private-project-1.docker.lan
-192.168.178.6  private-project-2.docker.lan
-192.168.178.6  private-project-3.docker.lan
 ```
 
 4. **Speichern** (Ctrl+S) und **DNS Cache leeren**:

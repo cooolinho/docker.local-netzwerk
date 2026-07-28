@@ -31,22 +31,10 @@ docker.lan-netzwerk/
 │   │   ├── 📄 docker-compose.yml
 │   │   └── 📄 README.md
 │   │
-│   ├── 📁 planka/
+│   └── 📁 planka/
 │   │   ├── 📄 docker-compose.yml
 │   │   ├── 📄 .env.example
 │   │   └── 📄 README.md
-│   │
-│   ├── 📁 private-project-1/
-│   │   ├── 📄 docker-compose.yml
-│   │   └── 📄 README.md
-│   │
-│   ├── 📁 private-project-2/
-│   │   ├── 📄 docker-compose.yml
-│   │   └── 📄 README.md
-│   │
-│   └── 📁 private-project-3/
-│       ├── 📄 docker-compose.yml
-│       └── 📄 README.md
 │
 └── 📁 scripts/                     # Hilfsskripte
     ├── 🔧 start-all.sh             # Startet alle Services

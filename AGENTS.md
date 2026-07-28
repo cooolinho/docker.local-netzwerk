@@ -169,9 +169,6 @@ docker-compose logs -f service-name
 - `projects/dashy/docker-compose.yml`
 - `projects/it-tools/docker-compose.yml`
 - `projects/planka/docker-compose.yml`
-- `projects/private-project-1/docker-compose.yml`
-- `projects/private-project-2/docker-compose.yml`
-- `projects/private-project-3/docker-compose.yml`
 
 ---
 

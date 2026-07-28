@@ -28,11 +28,6 @@ Diese Datei gibt dir einen Überblick über alle verfügbaren Dokumentationen un
 2. Nutze: `bash scripts/status.sh` für Überblick
 3. Siehe: [FAQ.md](./FAQ.md) für spezifische Probleme
 
-### ➕ "Ich möchte ein neues Projekt hinzufügen"
-1. Siehe: [README.md - Neues Projekt hinzufügen](./README.md#neues-projekt-hinzufügen)
-2. Kopiere: `projects/private-project-1/docker-compose.yml` als Template
-3. Konfiguriere dein Projekt
-
 ---
 
 ## 📑 Alle Dokumentationen
@@ -57,9 +52,6 @@ Diese Datei gibt dir einen Überblick über alle verfügbaren Dokumentationen un
 | [projects/it-tools/README.md](./projects/it-tools/README.md) | IT-Tools Sammlung | ✅ Ready |
 | [projects/planka/README.md](./projects/planka/README.md) | Kanban Board | ✅ Ready |
 | [projects/portainer/README.md](./projects/portainer/README.md) | Docker Management | ✅ Ready |
-| [projects/private-project-1/README.md](./projects/private-project-1/README.md) | Template | 🔧 Template |
-| [projects/private-project-2/README.md](./projects/private-project-2/README.md) | Template | 🔧 Template |
-| [projects/private-project-3/README.md](./projects/private-project-3/README.md) | Template | 🔧 Template |
 
 ---
 
@@ -139,9 +131,6 @@ http://traefik.docker.lan
 | IT-Tools | http://it-tools.docker.lan | corentinth/it-tools | ✅ Setup Ready |
 | Planka | http://planka.docker.lan | ghcr.io/plankanban/planka | ✅ Setup Ready |
 | Portainer | http://portainer.docker.lan | portainer/portainer-ce | ✅ Setup Ready |
-| Private 1 | http://private-project-1.docker.lan | your-image | 🔧 Template |
-| Private 2 | http://private-project-2.docker.lan | your-image | 🔧 Template |
-| Private 3 | http://private-project-3.docker.lan | your-image | 🔧 Template |
 
 ---
 

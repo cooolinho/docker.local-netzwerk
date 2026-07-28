@@ -27,3 +27,5 @@ logs/
 data/
 volumes/
 
+projects/private/*
+!projects/private/.gitkeep

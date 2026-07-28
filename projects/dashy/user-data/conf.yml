@@ -43,6 +43,14 @@ sections:
         icon: fas fa-server
         target: newtab
         id: infra_host
+      - title: Glances
+        description: System Monitoring
+        url: http://glances.docker.lan
+        icon: fas fa-chart-line
+        target: newtab
+        id: infra_glances
+        statusCheck: true
+        statusCheckUrl: http://monitor-api:monitor-readonly@traefik.docker.lan/api/http/services/glances%40docker
 
   - name: Anwendungen
     icon: fas fa-cube
@@ -50,6 +58,14 @@ sections:
       sortBy: default
       cols: 3
     items:
+      - title: Dashy
+        description: Personal Dashboard
+        url: http://dashy.docker.lan
+        icon: fas fa-home
+        target: newtab
+        id: app_dashy
+        statusCheck: true
+        statusCheckUrl: http://monitor-api:monitor-readonly@traefik.docker.lan/api/http/services/dashy%40docker
       - title: IT-Tools
         description: IT-Werkzeug-Sammlung
         url: http://it-tools.docker.lan
@@ -66,32 +82,21 @@ sections:
         id: app_planka
         statusCheck: true
         statusCheckUrl: http://monitor-api:monitor-readonly@traefik.docker.lan/api/http/services/planka%40docker
-      - title: Private Projekt 1
+
+  - name: Private Projekte
+    icon: fas fa-cube
+    displayData:
+      sortBy: default
+      cols: 3
+    items:
+      - title: My Media Library
         description: Dein Projekt
-        url: http://private-project-1.docker.lan
+        url: http://my-media-library.docker.lan/admin
         icon: fas fa-lock
         target: newtab
-        id: app_private_1
-      - title: Private Projekt 2
-        description: Dein Projekt
-        url: http://private-project-2.docker.lan
-        icon: fas fa-lock
-        target: newtab
-        id: app_private_2
-      - title: Private Projekt 3
-        description: Dein Projekt
-        url: http://private-project-3.docker.lan
-        icon: fas fa-lock
-        target: newtab
-        id: app_private_3
-      - title: Dashy
-        description: Personal Dashboard
-        url: http://dashy.docker.lan
-        icon: fas fa-home
-        target: newtab
-        id: app_dashy
+        id: app_my_media_library
         statusCheck: true
-        statusCheckUrl: http://monitor-api:monitor-readonly@traefik.docker.lan/api/http/services/dashy%40docker
+        statusCheckUrl: http://monitor-api:monitor-readonly@traefik.docker.lan/api/http/services/my-media-library%40docker
 
   - name: Dokumentation
     icon: fas fa-book

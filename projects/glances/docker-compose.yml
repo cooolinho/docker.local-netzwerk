@@ -1,0 +1,27 @@
+# https://github.com/nicolargo/glances
+
+services:
+    glances:
+        image: nicolargo/glances:latest
+        environment:
+            - TZ=Europe/Berlin
+            - PGID=1000
+            - PUID=1000
+            - GLANCES_OPT=-w
+        privileged: true
+        pid: host
+        volumes:
+            - '/var/run/docker.sock:/var/run/docker.sock:ro'
+        restart: unless-stopped
+        container_name: glances
+        networks:
+            - docker_lan_network
+        labels:
+            - "traefik.enable=true"
+            - "traefik.http.routers.glances.rule=Host(`glances.docker.lan`)"
+            - "traefik.http.routers.glances.entrypoints=web"
+            - "traefik.http.services.glances.loadbalancer.server.port=61208"
+
+networks:
+    docker_lan_network:
+        external: true

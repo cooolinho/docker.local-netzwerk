@@ -22,7 +22,6 @@ Diese Struktur ermöglicht es dir, mehrere Docker-Container über einen Reverse 
 - 🛠️ **IT-Tools**: `http://it-tools.docker.lan`
 - 📋 **Planka (Kanban Board)**: `http://planka.docker.lan`
 - 🐋 **Portainer (Docker Management)**: `http://portainer.docker.lan`
-- 🔧 **Private Projekte**: `http://private-project-1.docker.lan` usw.
 - 🔍 **Traefik Dashboard**: `http://traefik.docker.lan`
 
 ## 🏗️ Architektur
@@ -67,7 +66,6 @@ Diese Struktur ermöglicht es dir, mehrere Docker-Container über einen Reverse 
 | **IT-Tools** | `corentinth/it-tools` | `it-tools.docker.lan` | 80 | IT-Werkzeug-Sammlung |
 | **Planka** | `ghcr.io/plankanban/planka` | `planka.docker.lan` | 3000 | Kanban Board |
 | **Portainer** | `portainer/portainer-ce` | `portainer.docker.lan` | 9000 | Docker Management UI |
-| **Private Projekt 1-3** | Custom | `private-project-*.docker.lan` | Custom | Deine Projekte |
 | **Traefik** | `traefik:v2.10` | `traefik.docker.lan` | 80 | Reverse Proxy Dashboard |
 
 ## 🚀 Installation & Setup
@@ -151,9 +149,6 @@ docker-compose up -d
 cd ../planka
 docker-compose up -d
 
-# Deine privaten Projekte
-cd ../private-project-1
-docker-compose up -d
 # ... usw.
 ```
 
