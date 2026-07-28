@@ -28,20 +28,45 @@ Danach `.env` anpassen (mindestens Hosts und Passwörter):
 - `ROUNDCUBEMAIL_DB_PASSWORD`
 - `ROUNDCUBEMAIL_DB_ROOT_PASSWORD`
 
-## 4) Stack starten
+## 4) Alias-Accounts zentral anlegen
+
+```bash
+cp secrets/alias-accounts.example.php secrets/alias-accounts.php
+cp secrets/alias-master-password.example.txt secrets/alias-master-password.txt
+```
+
+Dann `secrets/alias-accounts.php` bearbeiten:
+
+- Keys immer als volle Mailbox (`mail@cooolinho.de`)
+- Alias-Login in Roundcube spaeter nur als `alias@` (z. B. `mail@`)
+- Echte Hetzner-Mailbox-Credentials als `mailbox_user`/`mailbox_password`
+- In `secrets/alias-master-password.txt` ein globales Master-Passwort setzen
+
+Optionaler Syntax- und Strukturcheck:
+
+```bash
+php scripts/check-alias-config.php
+```
+
+## 5) Stack starten
 
 ```bash
 docker-compose up -d
 docker-compose ps
 ```
 
-## 5) Aufruf und Test
+## 6) Aufruf und Test
 
 ```bash
 curl -I http://mail.docker.lan
 ```
 
 Dann im Browser öffnen: `http://mail.docker.lan`
+
+Login-Format im Roundcube-Formular:
+
+- Benutzername: `mail@` oder `dev@`
+- Passwort: globales Master-Passwort
 
 ## Nützliche Kommandos
 

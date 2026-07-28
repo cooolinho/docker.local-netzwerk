@@ -29,3 +29,7 @@ volumes/
 
 projects/private/*
 !projects/private/.gitkeep
+
+# Roundcube alias credentials (local only)
+projects/mailserver/secrets/alias-accounts.php
+projects/mailserver/secrets/alias-master-password.txt

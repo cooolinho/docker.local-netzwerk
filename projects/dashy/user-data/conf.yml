@@ -100,6 +100,14 @@ sections:
         id: app_planka
         statusCheck: true
         statusCheckUrl: http://monitor-api:monitor-readonly@traefik.docker.lan/api/http/services/planka%40docker
+      - title: Roundcube
+        description: Webmail Client
+        url: http://mail.docker.lan
+        icon: /roundcube.jpg
+        target: newtab
+        id: app_roundcube
+        statusCheck: true
+        statusCheckUrl: http://monitor-api:monitor-readonly@traefik.docker.lan/api/http/services/roundcube%40docker
 
   - name: Private Projekte
     icon: fas fa-cube
