@@ -24,6 +24,8 @@ Diese Struktur ermöglicht es dir, mehrere Docker-Container über einen Reverse 
 - 📋 **Planka (Kanban Board)**: `http://planka.docker.lan`
 - 🐋 **Portainer (Docker Management)**: `http://portainer.docker.lan`
 - 🔍 **Traefik Dashboard**: `http://traefik.docker.lan`
+- 📋 **Dozzle (Echtzeit Log-Viewer)**: `http://dozzle.docker.lan`
+- 📊 **Grafana (Log-Suche & Dashboards)**: `http://grafana.docker.lan`
 
 ## 🏗️ Architektur
 
@@ -68,6 +70,8 @@ Diese Struktur ermöglicht es dir, mehrere Docker-Container über einen Reverse 
 | **Planka** | `ghcr.io/plankanban/planka` | `planka.docker.lan` | 3000 | Kanban Board |
 | **Portainer** | `portainer/portainer-ce` | `portainer.docker.lan` | 9000 | Docker Management UI |
 | **Traefik** | `traefik:v2.10` | `traefik.docker.lan` | 80 | Reverse Proxy Dashboard |
+| **Dozzle** | `amir20/dozzle` | `dozzle.docker.lan` | 8080 | Echtzeit Container Log-Viewer |
+| **Grafana** | `grafana/grafana` | `grafana.docker.lan` | 3000 | Log-Suche & Dashboards (Loki) |
 
 ## 🚀 Installation & Setup
 
@@ -150,6 +154,18 @@ docker-compose up -d
 cd ../planka
 docker-compose up -d
 
+# Dozzle (Echtzeit Log-Viewer)
+cd ../dozzle
+cp .env.example .env
+# Benutzer generieren (siehe projects/dozzle/README.md)
+docker-compose up -d
+
+# Logging-Stack (Loki + Promtail + Grafana)
+cd ../logging
+cp .env.example .env
+nano .env    # GF_SECURITY_ADMIN_PASSWORD setzen!
+docker-compose up -d
+
 # ... usw.
 ```
 
@@ -180,6 +196,8 @@ Falls AdGuard Home nicht verfügbar ist:
 192.168.178.6  planka.docker.lan
 192.168.178.6  portainer.docker.lan
 192.168.178.6  traefik.docker.lan
+192.168.178.6  dozzle.docker.lan
+192.168.178.6  grafana.docker.lan
 ```
 
 > ⚠️ Hosts-Datei hat keinen Wildcard-Support — neue Projekte müssen manuell eingetragen werden.
@@ -434,5 +452,6 @@ Siehe `AGENTS.md` für Rollen und Verantwortlichkeiten.
 
 **Zuletzt aktualisiert**: 2026-07-28  
 **Traefik Version**: v2.10  
-**Docker Compose Version**: 3.8
+**Docker Compose Version**: 3.8  
+**Logging-Stack**: Loki 3.5 + Promtail 3.5 + Grafana latest
 

@@ -52,6 +52,8 @@ Diese Datei gibt dir einen Überblick über alle verfügbaren Dokumentationen un
 | [projects/it-tools/README.md](./projects/it-tools/README.md) | IT-Tools Sammlung | ✅ Ready |
 | [projects/planka/README.md](./projects/planka/README.md) | Kanban Board | ✅ Ready |
 | [projects/portainer/README.md](./projects/portainer/README.md) | Docker Management | ✅ Ready |
+| [projects/dozzle/README.md](./projects/dozzle/README.md) | Echtzeit Log-Viewer | ✅ Ready |
+| [projects/logging/README.md](./projects/logging/README.md) | Loki + Promtail + Grafana (persistente Logs) | ✅ Ready |
 
 ---
 
@@ -117,6 +119,12 @@ bash scripts/create-private-symlink.sh
 docker-compose logs -f traefik
 docker-compose -f projects/dashy/docker-compose.yml logs -f
 
+ Logs im Browser (Echtzeit)
+# http://dozzle.docker.lan
+
+# Logs im Browser (Persistenz & Suche)
+# http://grafana.docker.lan  → Dashboards → Docker Container Logs
+
 # In Container gehen
 docker exec -it [container-name] sh
 
@@ -135,6 +143,8 @@ http://traefik.docker.lan
 | IT-Tools | http://it-tools.docker.lan | corentinth/it-tools | ✅ Setup Ready |
 | Planka | http://planka.docker.lan | ghcr.io/plankanban/planka | ✅ Setup Ready |
 | Portainer | http://portainer.docker.lan | portainer/portainer-ce | ✅ Setup Ready |
+| Dozzle | http://dozzle.docker.lan | amir20/dozzle | ✅ Setup Ready |
+| Grafana | http://grafana.docker.lan | grafana/grafana | ✅ Setup Ready |
 
 ---
 

@@ -26,13 +26,15 @@ sections:
       - title: Traefik Dashboard
         description: Reverse Proxy Management
         url: http://traefik.docker.lan
-        icon: fas fa-project-diagram
+        icon: /traefik.png
         target: newtab
         id: infra_traefik
+        statusCheck: true
+        statusCheckUrl: http://monitor-api:monitor-readonly@traefik.docker.lan/api/http/services/traefik-dockerlocal-netzwerk%40docker
       - title: Portainer
         description: Docker Management UI
         url: http://portainer.docker.lan
-        icon: fas fa-docker
+        icon: /portainer.jpg
         target: newtab
         id: infra_portainer
         statusCheck: true
@@ -46,11 +48,27 @@ sections:
       - title: Glances
         description: System Monitoring
         url: http://glances.docker.lan
-        icon: fas fa-chart-line
+        icon: /glances.png
         target: newtab
         id: infra_glances
         statusCheck: true
         statusCheckUrl: http://monitor-api:monitor-readonly@traefik.docker.lan/api/http/services/glances%40docker
+      - title: Dozzle
+        description: Echtzeit Container Log Viewer
+        url: http://dozzle.docker.lan
+        icon: /dozzle.png
+        target: newtab
+        id: infra_dozzle
+        statusCheck: true
+        statusCheckUrl: http://monitor-api:monitor-readonly@traefik.docker.lan/api/http/services/dozzle%40docker
+      - title: Grafana
+        description: Visualisierung & Log-Explorer
+        url: http://grafana.docker.lan
+        icon: /grafana.png
+        target: newtab
+        id: infra_grafana
+        statusCheck: true
+        statusCheckUrl: http://monitor-api:monitor-readonly@traefik.docker.lan/api/http/services/grafana%40docker
 
   - name: Anwendungen
     icon: fas fa-cube
@@ -61,7 +79,7 @@ sections:
       - title: Dashy
         description: Personal Dashboard
         url: http://dashy.docker.lan
-        icon: fas fa-home
+        icon: /dashy.png
         target: newtab
         id: app_dashy
         statusCheck: true
@@ -69,7 +87,7 @@ sections:
       - title: IT-Tools
         description: IT-Werkzeug-Sammlung
         url: http://it-tools.docker.lan
-        icon: fas fa-tools
+        icon: /it-tools.png
         target: newtab
         id: app_ittools
         statusCheck: true
@@ -77,7 +95,7 @@ sections:
       - title: Planka
         description: Kanban Board
         url: http://planka.docker.lan
-        icon: fas fa-chart-bar
+        icon: /planka.png
         target: newtab
         id: app_planka
         statusCheck: true

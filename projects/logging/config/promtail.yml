@@ -1,0 +1,67 @@
+# Promtail Konfiguration
+# ======================
+# Liest Docker-Container-Logs und sendet sie an Loki
+
+server:
+  http_listen_port: 9080
+  grpc_listen_port: 0
+  log_level: warn
+
+# Positions-Datei: merkt sich wo Promtail beim letzten Mal aufgehört hat zu lesen
+positions:
+  filename: /tmp/positions.yaml
+
+# Loki-Endpunkt
+clients:
+  - url: http://loki:3100/loki/api/v1/push
+
+scrape_configs:
+  # ─────────────────────────────────────────────────────────────────────────────
+  # Docker Service Discovery
+  # Erkennt automatisch alle laufenden Container über den Docker Socket
+  # ─────────────────────────────────────────────────────────────────────────────
+  - job_name: docker
+    docker_sd_configs:
+      - host: unix:///var/run/docker.sock
+        refresh_interval: 5s
+        filters:
+          - name: status
+            values: ["running"]
+
+    relabel_configs:
+      # Container-Name (führenden Slash entfernen)
+      - source_labels: ["__meta_docker_container_name"]
+        regex: "/(.*)"
+        target_label: container
+
+      # Docker Image
+      - source_labels: ["__meta_docker_container_image"]
+        target_label: image
+
+      # Docker Compose Projekt-Name
+      - source_labels: ["__meta_docker_compose_project"]
+        target_label: compose_project
+
+      # Docker Compose Service-Name
+      - source_labels: ["__meta_docker_compose_service"]
+        target_label: compose_service
+
+      # Log-Stream (stdout / stderr)
+      - source_labels: ["__meta_docker_container_log_stream"]
+        target_label: stream
+
+      # Host-Label
+      - replacement: docker.lan
+        target_label: host
+
+    # Pipeline-Stages: JSON-Logs parsen (robuste Basis)
+    pipeline_stages:
+      # Prüfen ob Log JSON ist, dann parsen
+      - json:
+          expressions:
+            level: level
+            msg: msg
+            time: time
+          drop_malformed: false
+
+
