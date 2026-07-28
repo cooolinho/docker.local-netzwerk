@@ -1,36 +1,36 @@
 version: '3.8'
 
 services:
-  dashy:
-    image: lissy93/dashy:latest
-    container_name: dashy
-    restart: unless-stopped
-    networks:
-      - docker-local-network
-    # Ports müssen NICHT exponiert werden, da Traefik den Container direkt über das Netzwerk erreicht
-    # ports:
-    #   - "3000:80"
-    environment:
-      - TZ=Europe/Berlin
-      - NODE_ENV=production
-    volumes:
-      - ./conf.yml:/app/public/conf.yml:ro
-      - dashy-data:/app/public/item-icons
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.dashy.rule=Host(`dashy.docker.local`)"
-      - "traefik.http.routers.dashy.entrypoints=web"
-      - "traefik.http.services.dashy.loadbalancer.server.port=80"
-    logging:
-      driver: "json-file"
-      options:
-        max-size: "10m"
-        max-file: "3"
-
-volumes:
-  dashy-data:
+    dashy:
+        image: lissy93/dashy:latest
+        container_name: dashy
+        restart: unless-stopped
+        networks:
+            - docker_lan_network
+        environment:
+            - TZ=Europe/Berlin
+            - NODE_ENV=production
+        volumes:
+            - ./user-data:/app/user-data
+        labels:
+            - "traefik.enable=true"
+            - "traefik.docker.network=docker_lan_network"
+            - "traefik.http.routers.dashy.rule=Host(`dashy.docker.lan`)"
+            - "traefik.http.routers.dashy.entrypoints=web"
+            - "traefik.http.services.dashy.loadbalancer.server.port=8080"
+        logging:
+            driver: "json-file"
+            options:
+                max-size: "10m"
+                max-file: "3"
+        healthcheck:
+            test: [ 'CMD', 'node', '/app/services/healthcheck.js' ]
+            interval: 1m30s
+            timeout: 10s
+            retries: 3
+            start_period: 30s
 
 networks:
-  docker-local-network:
-    external: true
+    docker_lan_network:
+        external: true
 

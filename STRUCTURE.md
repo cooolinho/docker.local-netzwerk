@@ -3,7 +3,7 @@
 ## 📁 Gesamte Struktur
 
 ```
-docker.local-netzwerk/
+docker.lan-netzwerk/
 ├── 📄 README.md                    # Hauptdokumentation
 ├── 📄 QUICKSTART.md                # 5-Minuten Quick-Start
 ├── 📄 FAQ.md                       # Häufig gestellte Fragen
@@ -65,7 +65,7 @@ docker.local-netzwerk/
 | **README.md** | Hauptdokumentation - Setup, Architektur, Verwendung |
 | **QUICKSTART.md** | 5-Minuten-Guide zum schnellen Starten |
 | **FAQ.md** | Häufig gestellte Fragen & Antworten |
-| **DNS_SETUP.md** | Anleitung für DNS-Konfiguration (.docker.local) |
+| **DNS_SETUP.md** | Anleitung für DNS-Konfiguration (.docker.lan) |
 | **AGENTS.md** | Rollen, Verantwortlichkeiten, Checklisten |
 | **STRUCTURE.md** | Diese Datei - Ordnerstruktur-Übersicht |
 | **.env** | Umgebungsvariablen (NICHT in Git!) |
@@ -111,7 +111,7 @@ Jedes Projekt-Verzeichnis (`dashy/`, `it-tools/`, `planka/`, etc.):
    └─ DNS_SETUP.md lesen
    
 2. Netzwerk erstellen
-   └─ docker network create docker-local-network
+   └─ docker network create docker_lan_network
    
 3. Traefik starten
    └─ docker-compose up -d traefik
@@ -120,7 +120,7 @@ Jedes Projekt-Verzeichnis (`dashy/`, `it-tools/`, `planka/`, etc.):
    └─ bash scripts/start-all.sh
    
 5. Testen & Logs prüfen
-   └─ http://traefik.docker.local:8080
+   └─ http://traefik.docker.lan:8080
 ```
 
 ### Neues Projekt hinzufügen
@@ -136,10 +136,10 @@ Jedes Projekt-Verzeichnis (`dashy/`, `it-tools/`, `planka/`, etc.):
    └─ cd projects/mein-projekt && docker-compose up -d
    
 4. DNS aktualisieren
-   └─ Hosts-Datei: 192.168.178.6  mein-projekt.docker.local
+   └─ Hosts-Datei: 192.168.178.6  mein-projekt.docker.lan
    
 5. Testen
-   └─ http://mein-projekt.docker.local
+   └─ http://mein-projekt.docker.lan
 ```
 
 ### Troubleshooting
@@ -155,10 +155,10 @@ Jedes Projekt-Verzeichnis (`dashy/`, `it-tools/`, `planka/`, etc.):
    └─ docker exec -it [container] sh
    
 4. Traefik Dashboard nutzen
-   └─ http://traefik.docker.local:8080
+   └─ http://traefik.docker.lan:8080
    
 5. DNS testen
-   └─ nslookup mein-projekt.docker.local
+   └─ nslookup mein-projekt.docker.lan
 ```
 
 ---
@@ -177,7 +177,7 @@ traefik/traefik.yml
 projects/*/docker-compose.yml
     └─ .env (globale Variablen)
     └─ projects/*/conf.yml oder .env (Projekt-Variablen)
-    └─ traefik-Network (docker-local-network muss existieren)
+    └─ traefik-Network (docker_lan_network muss existieren)
 ```
 
 ---

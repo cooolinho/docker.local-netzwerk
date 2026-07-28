@@ -6,7 +6,7 @@ services:
     container_name: private-project-2
     restart: unless-stopped
     networks:
-      - docker-local-network
+      - docker_lan_network
     environment:
       TZ: Europe/Berlin
       # ÄNDERN: Deine Umgebungsvariablen hier eintragen
@@ -14,7 +14,7 @@ services:
     #   - ./data:/app/data
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.private-project-2.rule=Host(`private-project-2.docker.local`)"
+      - "traefik.http.routers.private-project-2.rule=Host(`private-project-2.docker.lan`)"
       - "traefik.http.routers.private-project-2.entrypoints=web"
       - "traefik.http.services.private-project-2.loadbalancer.server.port=3000"  # ÄNDERN: Port anpassen
     logging:
@@ -24,6 +24,6 @@ services:
         max-file: "3"
 
 networks:
-  docker-local-network:
+  docker_lan_network:
     external: true
 

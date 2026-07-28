@@ -4,7 +4,7 @@ Portainer ist ein leichtgewichtiges Docker-Management-Interface mit Web-Zugriff 
 
 ## 🔗 Links
 
-- **Domain**: `http://portainer.docker.local`
+- **Domain**: `http://portainer.docker.lan`
 - **Image**: `portainer/portainer-ce`
 - **GitHub**: https://github.com/portainer/portainer
 - **Docs**: https://docs.portainer.io
@@ -33,7 +33,7 @@ docker-compose logs -f portainer
 
 ## 📖 Erstes Login
 
-1. Öffne `http://portainer.docker.local`
+1. Öffne `http://portainer.docker.lan`
 2. Erstelle Admin-Benutzer (Benutzername & Passwort)
 3. Wähle "Docker" als Environment (lokaler Docker-Daemon)
 4. Fertig! 🎉
@@ -221,7 +221,7 @@ docker volume inspect portainer-data
 ### ❌ Verbindung von außerhalb funktioniert nicht
 
 1. Traefik läuft? `docker ps | grep traefik`
-2. DNS funktioniert? `nslookup portainer.docker.local`
+2. DNS funktioniert? `nslookup portainer.docker.lan`
 3. Labels korrekt? `docker-compose config | grep traefik`
 
 ## 🔄 Update

@@ -40,27 +40,27 @@ for project_dir in traefik projects/*/; do
 done
 
 echo -e "${BLUE}Netzwerk-Status:${NC}"
-if docker network inspect docker-local-network > /dev/null 2>&1; then
-    echo -e "${GREEN}✓ docker-local-network existiert${NC}"
+if docker network inspect docker_lan_network > /dev/null 2>&1; then
+    echo -e "${GREEN}✓ docker_lan_network existiert${NC}"
     echo ""
     echo -e "Verbundene Container:"
-    docker network inspect docker-local-network --format="{{range .Containers}}  - {{.Name}}: {{.IPv4Address}}\n{{end}}"
+    docker network inspect docker_lan_network --format="{{range .Containers}}  - {{.Name}}: {{.IPv4Address}}\n{{end}}"
 else
-    echo -e "${RED}✗ docker-local-network nicht vorhanden${NC}"
+    echo -e "${RED}✗ docker_lan_network nicht vorhanden${NC}"
 fi
 
 echo -e "\n${BLUE}Traefik Dashboard:${NC}"
 if docker ps | grep -q traefik; then
-    echo -e "${GREEN}✓ http://traefik.docker.local:8080${NC}"
+    echo -e "${GREEN}✓ http://traefik.docker.lan:8080${NC}"
 else
     echo -e "${RED}✗ Traefik läuft nicht${NC}"
 fi
 
 echo -e "\n${BLUE}Quick Links:${NC}"
-echo -e "  http://dashy.docker.local"
-echo -e "  http://it-tools.docker.local"
-echo -e "  http://planka.docker.local"
-echo -e "  http://traefik.docker.local:8080"
+echo -e "  http://dashy.docker.lan"
+echo -e "  http://it-tools.docker.lan"
+echo -e "  http://planka.docker.lan"
+echo -e "  http://traefik.docker.lan:8080"
 
 echo -e "\n${BLUE}Commands:${NC}"
 echo -e "  Alle starten:   ${GREEN}bash scripts/start-all.sh${NC}"

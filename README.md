@@ -16,23 +16,23 @@ Lokale Docker-Umgebung mit Traefik als zentralem Reverse Proxy zur Verwaltung me
 
 ## 🎯 Überblick
 
-Diese Struktur ermöglicht es dir, mehrere Docker-Container über einen Reverse Proxy (Traefik) zu verwalten. Statt Container mit Ports aufzurufen (z.B. `docker.local:3000`), erreichst du sie über aussagekräftige Subdomains:
+Diese Struktur ermöglicht es dir, mehrere Docker-Container über einen Reverse Proxy (Traefik) zu verwalten. Statt Container mit Ports aufzurufen (z.B. `docker.lan:3000`), erreichst du sie über aussagekräftige Subdomains:
 
-- 🏠 **Dashy (Dashboard)**: `http://dashy.docker.local`
-- 🛠️ **IT-Tools**: `http://it-tools.docker.local`
-- 📋 **Planka (Kanban Board)**: `http://planka.docker.local`
-- 🐋 **Portainer (Docker Management)**: `http://portainer.docker.local`
-- 🔧 **Private Projekte**: `http://private-project-1.docker.local` usw.
-- 🔍 **Traefik Dashboard**: `http://traefik.docker.local:8080`
+- 🏠 **Dashy (Dashboard)**: `http://dashy.docker.lan`
+- 🛠️ **IT-Tools**: `http://it-tools.docker.lan`
+- 📋 **Planka (Kanban Board)**: `http://planka.docker.lan`
+- 🐋 **Portainer (Docker Management)**: `http://portainer.docker.lan`
+- 🔧 **Private Projekte**: `http://private-project-1.docker.lan` usw.
+- 🔍 **Traefik Dashboard**: `http://traefik.docker.lan:8080`
 
 ## 🏗️ Architektur
 
 ```
 ┌─────────────────────────────────────────────────────────┐
 │              Host (192.168.178.1)                       │
-│  ┌──────────────────────────────────────────────────┐  │
-│  │  Windows Hosts-Datei (.docker.local DNS)         │  │
-│  └──────────────────────────────────────────────────┘  │
+│  ┌──────────────────────────────────────────────────┐   │
+│  │  Windows Hosts-Datei (.docker.lan DNS)         │   │
+│  └──────────────────────────────────────────────────┘   │
 └─────────────────────────────────────────────────────────┘
                          │
                          │ HTTP/HTTPS
@@ -40,21 +40,21 @@ Diese Struktur ermöglicht es dir, mehrere Docker-Container über einen Reverse 
 ┌─────────────────────────────────────────────────────────┐
 │      VM / Docker Host (192.168.178.6)                   │
 │                                                         │
-│  ┌──────────────────────────────────────────────────┐  │
-│  │  Docker Network: docker-local-network            │  │
-│  │                                                  │  │
-│  │  ┌─────────────────────────────────────────┐   │  │
-│  │  │  Traefik (Reverse Proxy)                │   │  │
-│  │  │  Port: 80 (HTTP), 8080 (Dashboard)      │   │  │
-│  │  └─────────────────────────────────────────┘   │  │
-│  │         │        │         │        │           │  │
-│  │    ┌────▼─┐  ┌──▼──┐  ┌───▼──┐ ┌──▼────┐      │  │
-│  │    │Dashy │  │IT   │  │Planka│ │Private│      │  │
-│  │    │3000  │  │Tools│  │3000  │ │Proj.  │      │  │
-│  │    │      │  │3000 │  │      │ │3000   │      │  │
-│  │    └──────┘  └─────┘  └──────┘ └───────┘      │  │
-│  │                                                  │  │
-│  └──────────────────────────────────────────────────┘  │
+│  ┌───────────────────────────────────────────────────┐  │
+│  │  Docker Network: docker_lan_network             │  │
+│  │                                                   │  │
+│  │  ┌─────────────────────────────────────────┐      │  │
+│  │  │  Traefik (Reverse Proxy)                │      │  │
+│  │  │  Port: 80 (HTTP), 8080 (Dashboard)      │      │  │
+│  │  └─────────────────────────────────────────┘      │  │
+│  │         │        │         │        │             │  │
+│  │    ┌────▼─┐  ┌──▼──┐  ┌───▼──┐ ┌──▼────┐          │  │
+│  │    │Dashy │  │IT   │  │Planka│ │Private│          │  │
+│  │    │3000  │  │Tools│  │3000  │ │Proj.  │          │  │
+│  │    │      │  │3000 │  │      │ │3000   │          │  │
+│  │    └──────┘  └─────┘  └──────┘ └───────┘          │  │
+│  │                                                   │  │
+│  └───────────────────────────────────────────────────┘  │
 │                                                         │
 └─────────────────────────────────────────────────────────┘
 ```
@@ -63,12 +63,12 @@ Diese Struktur ermöglicht es dir, mehrere Docker-Container über einen Reverse 
 
 | Service | Image | Domain | Port | Beschreibung |
 |---------|-------|--------|------|-------------|
-| **Dashy** | `lissy93/dashy` | `dashy.docker.local` | 80 | Personal Dashboard |
-| **IT-Tools** | `corentinth/it-tools` | `it-tools.docker.local` | 80 | IT-Werkzeug-Sammlung |
-| **Planka** | `ghcr.io/plankanban/planka` | `planka.docker.local` | 3000 | Kanban Board |
-| **Portainer** | `portainer/portainer-ce` | `portainer.docker.local` | 9000 | Docker Management UI |
-| **Private Projekt 1-3** | Custom | `private-project-*.docker.local` | Custom | Deine Projekte |
-| **Traefik** | `traefik:v2.10` | `traefik.docker.local:8080` | 8080 | Reverse Proxy Dashboard |
+| **Dashy** | `lissy93/dashy` | `dashy.docker.lan` | 80 | Personal Dashboard |
+| **IT-Tools** | `corentinth/it-tools` | `it-tools.docker.lan` | 80 | IT-Werkzeug-Sammlung |
+| **Planka** | `ghcr.io/plankanban/planka` | `planka.docker.lan` | 3000 | Kanban Board |
+| **Portainer** | `portainer/portainer-ce` | `portainer.docker.lan` | 9000 | Docker Management UI |
+| **Private Projekt 1-3** | Custom | `private-project-*.docker.lan` | Custom | Deine Projekte |
+| **Traefik** | `traefik:v2.10` | `traefik.docker.lan:8080` | 8080 | Reverse Proxy Dashboard |
 
 ## 🚀 Installation & Setup
 
@@ -81,7 +81,7 @@ Diese Struktur ermöglicht es dir, mehrere Docker-Container über einen Reverse 
 ### 1. Repository klonen/einrichten
 
 ```bash
-cd D:\Projekte\docker.local-netzwerk
+cd D:\Projekte\docker.lan-netzwerk
 ```
 
 ### 2. Umgebungsvariablen konfigurieren
@@ -89,7 +89,7 @@ cd D:\Projekte\docker.local-netzwerk
 Die `.env` Datei ist bereits vorkonfiguriert. Passe folgende Werte an falls nötig:
 
 ```env
-DOMAIN=docker.local                           # Domain-Endung
+DOMAIN=docker.lan                           # Domain-Endung
 DOCKER_HOST=192.168.178.6                     # IP der VM
 TRAEFIK_DASHBOARD_USER=admin                  # Dashboard Benutzername
 TRAEFIK_DASHBOARD_PASSWORD=admin              # Dashboard Passwort
@@ -101,29 +101,29 @@ Bearbeite `C:\Windows\System32\drivers\etc\hosts` als Administrator:
 
 ```hosts
 # Docker Local Network
-192.168.178.6  docker.local
-192.168.178.6  dashy.docker.local
-192.168.178.6  it-tools.docker.local
-192.168.178.6  planka.docker.local
-192.168.178.6  portainer.docker.local
-192.168.178.6  private-project-1.docker.local
-192.168.178.6  private-project-2.docker.local
-192.168.178.6  private-project-3.docker.local
-192.168.178.6  traefik.docker.local
+192.168.178.6  docker.lan
+192.168.178.6  dashy.docker.lan
+192.168.178.6  it-tools.docker.lan
+192.168.178.6  planka.docker.lan
+192.168.178.6  portainer.docker.lan
+192.168.178.6  private-project-1.docker.lan
+192.168.178.6  private-project-2.docker.lan
+192.168.178.6  private-project-3.docker.lan
+192.168.178.6  traefik.docker.lan
 ```
 
 **Oder nutze einen lokalen DNS-Server** (z.B. auf deinem Docker Host) mit Wildcard-Einträgen:
 
 ```dns
-*.docker.local  A  192.168.178.6
-docker.local    A  192.168.178.6
+*.docker.lan  A  192.168.178.6
+docker.lan    A  192.168.178.6
 ```
 
 ### 4. Externes Netzwerk erstellen (auf Docker Host)
 
 ```bash
 # SSH auf VM oder direkt auf Docker Host
-docker network create docker-local-network --driver bridge
+docker network create docker_lan_network --driver bridge
 ```
 
 ### 5. Traefik starten
@@ -190,7 +190,7 @@ dns-server:
   volumes:
     - ./dnsmasq.conf:/etc/dnsmasq.conf
   networks:
-    - docker-local-network
+    - docker_lan_network
 ```
 
 ## 🔧 Verwendung
@@ -212,15 +212,15 @@ dns-server:
        container_name: mein-service
        restart: unless-stopped
        networks:
-         - docker-local-network
+         - docker_lan_network
        labels:
          - "traefik.enable=true"
-         - "traefik.http.routers.mein-projekt.rule=Host(`mein-projekt.docker.local`)"
+         - "traefik.http.routers.mein-projekt.rule=Host(`mein-projekt.docker.lan`)"
          - "traefik.http.routers.mein-projekt.entrypoints=web"
          - "traefik.http.services.mein-projekt.loadbalancer.server.port=3000"
 
    networks:
-     docker-local-network:
+     docker_lan_network:
        external: true
    ```
 
@@ -231,7 +231,7 @@ dns-server:
 
 4. **DNS aktualisieren** (Hosts-Datei):
    ```hosts
-   192.168.178.6  mein-projekt.docker.local
+   192.168.178.6  mein-projekt.docker.lan
    ```
 
 ### Container verwalten
@@ -253,7 +253,7 @@ docker-compose -f projects/dashy/docker-compose.yml up -d
 
 ## 📊 Traefik Dashboard
 
-**URL**: `http://traefik.docker.local:8080`
+**URL**: `http://traefik.docker.lan:8080`
 
 **Anmeldedaten**:
 - Benutzername: `admin`
@@ -318,7 +318,7 @@ Nutze in Labels:
 2. **Netzwerk nicht existiert**:
    ```bash
    docker network ls
-   docker network create docker-local-network
+   docker network create docker_lan_network
    ```
 
 3. **Service läuft nicht**:
@@ -331,7 +331,7 @@ Nutze in Labels:
 1. **Hosts-Datei nicht aktualisiert**:
    - Admin-Rechte?
    - Richtige IP-Adresse?
-   - nslookup Test: `nslookup dashy.docker.local`
+   - nslookup Test: `nslookup dashy.docker.lan`
 
 2. **DNS Cache leeren** (Windows):
    ```powershell

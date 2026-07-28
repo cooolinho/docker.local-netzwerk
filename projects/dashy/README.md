@@ -4,7 +4,7 @@ Lissy93's Dashy ist ein customisierbares, modernes Personal Dashboard für Bookm
 
 ## 🔗 Links
 
-- **Domain**: `http://dashy.docker.local`
+- **Domain**: `http://dashy.docker.lan`
 - **Image**: `lissy93/dashy`
 - **GitHub**: https://github.com/lissy93/dashy
 - **Docs**: https://dashy.to/docs
@@ -36,7 +36,7 @@ docker-compose logs -f dashy
 
 ## 📖 Verwenden
 
-1. Öffne `http://dashy.docker.local`
+1. Öffne `http://dashy.docker.lan`
 2. Bearbeite `conf.yml` um Links hinzuzufügen
 3. Browser neu laden oder Container neu starten
 

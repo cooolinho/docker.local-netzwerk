@@ -4,7 +4,7 @@ IT-Tools ist eine kostenlose, open-source Sammlung von nützlichen Tools für IT
 
 ## 🔗 Links
 
-- **Domain**: `http://it-tools.docker.local`
+- **Domain**: `http://it-tools.docker.lan`
 - **Image**: `corentinth/it-tools`
 - **GitHub**: https://github.com/CorentinTh/it-tools
 - **Docs**: https://it-tools.tech
@@ -36,7 +36,7 @@ docker-compose logs -f it-tools
 
 ## 📖 Verwenden
 
-1. Öffne `http://it-tools.docker.local`
+1. Öffne `http://it-tools.docker.lan`
 2. Wähle ein Tool aus der Sidebar
 3. Nutze das Tool
 

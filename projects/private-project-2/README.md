@@ -4,7 +4,7 @@ Beschreibung deines Projekts.
 
 ## 🔗 Links
 
-- **Domain**: `http://private-project-2.docker.local`
+- **Domain**: `http://private-project-2.docker.lan`
 - **Port**: `3000` (intern)
 - **Repository**: [Link zum Repo]
 - **Dokumentation**: [Link zur Doku]
@@ -38,7 +38,7 @@ docker-compose logs -f
 
 ## 📖 Verwenden
 
-1. Öffne `http://private-project-2.docker.local`
+1. Öffne `http://private-project-2.docker.lan`
 2. [Deine Verwendungsanleitung hier]
 
 ## 📦 Storage

@@ -1,96 +1,104 @@
 # Dashy Config - Lokales Dashboard
 # https://dashy.to/docs/configuration
 
-pageTitle: Docker Local Network
+pageInfo:
+  title: Docker Local Network
+  description: Zentrale Startseite fuer lokale Docker Services
+  navLinks:
+    - title: Traefik Docs
+      path: https://doc.traefik.io/
+
 appConfig:
   theme: material
   language: de
   layout: auto
   iconSize: medium
-  showNav: true
-  navPosition: top
-  enableFavicon: true
   enableFontAwesome: true
-  width: 1200px
   colCount: 4
 
-# Navigation
-nav:
-  - title: Home
-    icon: fas fa-home
-  - title: Infrastructure
-    icon: fas fa-cogs
-  - title: Projects
-    icon: fas fa-cube
-
 sections:
-  - name: Infrastructure
+  - name: Infrastruktur
     icon: fas fa-cogs
+    displayData:
+      sortBy: default
+      cols: 3
     items:
       - title: Traefik Dashboard
         description: Reverse Proxy Management
-        url: http://traefik.docker.local:8080
+        url: http://traefik.docker.lan:8080
         icon: fas fa-project-diagram
         target: newtab
+        id: infra_traefik
       - title: Portainer
         description: Docker Management UI
-        url: http://portainer.docker.local
+        url: http://portainer.docker.lan
         icon: fas fa-docker
         target: newtab
+        id: infra_portainer
       - title: Docker Host
         description: 192.168.178.6
         url: http://192.168.178.6
         icon: fas fa-server
         target: newtab
+        id: infra_host
 
   - name: Anwendungen
     icon: fas fa-cube
+    displayData:
+      sortBy: default
+      cols: 3
     items:
       - title: IT-Tools
         description: IT-Werkzeug-Sammlung
-        url: http://it-tools.docker.local
+        url: http://it-tools.docker.lan
         icon: fas fa-tools
         target: newtab
+        id: app_ittools
       - title: Planka
         description: Kanban Board
-        url: http://planka.docker.local
+        url: http://planka.docker.lan
         icon: fas fa-chart-bar
         target: newtab
+        id: app_planka
       - title: Private Projekt 1
         description: Dein Projekt
-        url: http://private-project-1.docker.local
+        url: http://private-project-1.docker.lan
         icon: fas fa-lock
         target: newtab
+        id: app_private_1
       - title: Private Projekt 2
         description: Dein Projekt
-        url: http://private-project-2.docker.local
+        url: http://private-project-2.docker.lan
         icon: fas fa-lock
         target: newtab
+        id: app_private_2
       - title: Private Projekt 3
         description: Dein Projekt
-        url: http://private-project-3.docker.local
+        url: http://private-project-3.docker.lan
         icon: fas fa-lock
         target: newtab
+        id: app_private_3
 
   - name: Dokumentation
     icon: fas fa-book
+    displayData:
+      collapsed: false
     items:
       - title: README
-        description: Setup & Konfiguration
-        url: file:///README.md
+        description: Setup und Konfiguration
+        url: https://github.com/cooolinho/docker.local-netzwerk/blob/main/projects/dashy/README.md
         icon: fas fa-file-alt
-      - title: AGENTS
-        description: Rollen & Verantwortlichkeiten
-        url: file:///AGENTS.md
-        icon: fas fa-users
+        id: docs_readme
       - title: Docker Compose
-        description: Offizielle Docs
+        description: Offizielle Doku
         url: https://docs.docker.com/compose/
         icon: fab fa-docker
         target: newtab
+        id: docs_compose
       - title: Traefik
-        description: Reverse Proxy Docs
+        description: Reverse Proxy Doku
         url: https://doc.traefik.io/
         icon: fas fa-arrows-alt-v
         target: newtab
+        id: docs_traefik
 

@@ -4,7 +4,7 @@ Planka ist ein self-hosted Kanban-Board ähnlich Trello, perfekt für Team-Zusam
 
 ## 🔗 Links
 
-- **Domain**: `http://planka.docker.local`
+- **Domain**: `http://planka.docker.lan`
 - **Image**: `ghcr.io/plankanban/planka`
 - **GitHub**: https://github.com/plankanban/planka
 - **Docs**: https://planka.app
@@ -26,14 +26,14 @@ Planka ist ein self-hosted Kanban-Board ähnlich Trello, perfekt für Team-Zusam
 
 | Variable | Standard | Beschreibung |
 |----------|----------|-------------|
-| `BASE_URL` | `http://planka.docker.local` | Externe URL |
+| `BASE_URL` | `http://planka.docker.lan` | Externe URL |
 | `DATABASE_URL` | `postgresql://planka:...` | Datenbankverbindung |
 | `SECRET_KEY` | `planka-secret-key-...` | Session Secret |
 
 ### Initialisierung
 
 1. Starte den Container
-2. Öffne `http://planka.docker.local`
+2. Öffne `http://planka.docker.lan`
 3. Registriere einen Admin-Benutzer (erster Benutzer ist Admin)
 4. Erstelle Boards & Listen
 
@@ -52,7 +52,7 @@ docker-compose ps
 
 ## 📖 Verwenden
 
-1. Öffne `http://planka.docker.local`
+1. Öffne `http://planka.docker.lan`
 2. Melde dich an (erste Benutzer = Admin)
 3. Erstelle Workspace → Board → Lists → Cards
 4. Lade Teamkollegen ein

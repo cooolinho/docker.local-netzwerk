@@ -18,12 +18,12 @@ Dieses Dokument hilft dir, die Docker Local Network Umgebung in 5 Minuten zum La
 1. Öffne `C:\Windows\System32\drivers\etc\hosts` als Administrator
 2. Trage am Ende folgende Zeilen ein:
 ```
-192.168.178.6  docker.local
-192.168.178.6  dashy.docker.local
-192.168.178.6  it-tools.docker.local
-192.168.178.6  planka.docker.local
-192.168.178.6  portainer.docker.local
-192.168.178.6  traefik.docker.local
+192.168.178.6  docker.lan
+192.168.178.6  dashy.docker.lan
+192.168.178.6  it-tools.docker.lan
+192.168.178.6  planka.docker.lan
+192.168.178.6  portainer.docker.lan
+192.168.178.6  traefik.docker.lan
 ```
 3. Speichern (Strg+S)
 4. PowerShell als Administrator öffnen:
@@ -44,13 +44,13 @@ ssh user@192.168.178.6
 ### 3️⃣ Docker Network erstellen (0,5 Min)
 
 ```bash
-docker network create docker-local-network --driver bridge
+docker network create docker_lan_network --driver bridge
 ```
 
 ### 4️⃣ Traefik starten (1 Min)
 
 ```bash
-cd /pfad/zu/docker.local-netzwerk
+cd /pfad/zu/docker.lan-netzwerk
 docker-compose up -d traefik
 
 # Überprüfe Traefik läuft
@@ -75,11 +75,11 @@ bash scripts/start-all.sh
 
 | Service | URL |
 |---------|-----|
-| Dashboard | `http://traefik.docker.local:8080` |
-| Dashy | `http://dashy.docker.local` |
-| IT-Tools | `http://it-tools.docker.local` |
-| Planka | `http://planka.docker.local` |
-| Portainer | `http://portainer.docker.local` |
+| Dashboard | `http://traefik.docker.lan:8080` |
+| Dashy | `http://dashy.docker.lan` |
+| IT-Tools | `http://it-tools.docker.lan` |
+| Planka | `http://planka.docker.lan` |
+| Portainer | `http://portainer.docker.lan` |
 
 **Fertig! 🎉** Alle Services sollten jetzt erreichbar sein.
 
@@ -91,7 +91,7 @@ bash scripts/start-all.sh
 ```powershell
 # Auf Windows Host
 ipconfig /flushdns
-nslookup dashy.docker.local
+nslookup dashy.docker.lan
 ```
 
 ### ❌ "Connection refused"
@@ -104,7 +104,7 @@ docker-compose logs traefik  # Was sagt das Log?
 ### ❌ "Weiße Seite / 404"
 ```bash
 # Auf VM
-curl http://dashy.docker.local  # Funktioniert lokal?
+curl http://dashy.docker.lan  # Funktioniert lokal?
 docker exec traefik curl http://dashy:80  # Kann Traefik den Container erreichen?
 ```
 
@@ -138,10 +138,10 @@ cd projects/mein-projekt
 docker-compose up -d
 
 # 4. In Hosts-Datei hinzufügen
-# 192.168.178.6  mein-projekt.docker.local
+# 192.168.178.6  mein-projekt.docker.lan
 
 # 5. Testen
-# Öffne http://mein-projekt.docker.local
+# Öffne http://mein-projekt.docker.lan
 ```
 
 ---

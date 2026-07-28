@@ -7,7 +7,7 @@ Diese Datei gibt dir einen Überblick über alle verfügbaren Dokumentationen un
 ### 🚀 "Ich möchte schnell starten"
 1. Lies: [QUICKSTART.md](./QUICKSTART.md) (5 Min)
 2. Folge der Anleitung
-3. Öffne http://traefik.docker.local:8080
+3. Öffne http://traefik.docker.lan:8080
 
 ### 📖 "Ich möchte alles verstehen"
 1. Lies: [README.md](./README.md) (20-30 Min)
@@ -17,7 +17,7 @@ Diese Datei gibt dir einen Überblick über alle verfügbaren Dokumentationen un
 ### 🌐 "DNS funktioniert nicht"
 1. Lies: [DNS_SETUP.md](./DNS_SETUP.md)
 2. Wende die Schritte an
-3. Teste: `ping dashy.docker.local`
+3. Teste: `ping dashy.docker.lan`
 
 ### ❓ "Ich habe eine Frage"
 1. Suche: [FAQ.md](./FAQ.md)
@@ -45,7 +45,7 @@ Diese Datei gibt dir einen Überblick über alle verfügbaren Dokumentationen un
 | **[QUICKSTART.md](./QUICKSTART.md)** | 5 Min | Anfänger | Schnelle 5-Schritte-Anleitung |
 | **[AGENTS.md](./AGENTS.md)** | 20 Min | Administratoren | Rollen, Checklisten, Wartungspläne |
 | **[FAQ.md](./FAQ.md)** | 15 Min | Alle | Häufige Fragen & Lösungen |
-| **[DNS_SETUP.md](./DNS_SETUP.md)** | 10 Min | Anfänger | DNS-Konfiguration für .docker.local |
+| **[DNS_SETUP.md](./DNS_SETUP.md)** | 10 Min | Anfänger | DNS-Konfiguration für .docker.lan |
 | **[STRUCTURE.md](./STRUCTURE.md)** | 10 Min | Entwickler | Ordnerstruktur & Dateiübersicht |
 | **[INDEX.md](./INDEX.md)** | 5 Min | Alle | Diese Datei |
 
@@ -125,7 +125,7 @@ docker-compose -f projects/dashy/docker-compose.yml logs -f
 docker exec -it [container-name] sh
 
 # Traefik Dashboard
-http://traefik.docker.local:8080
+http://traefik.docker.lan:8080
 ```
 
 ---
@@ -134,14 +134,14 @@ http://traefik.docker.local:8080
 
 | Service | URL | Image | Status |
 |---------|-----|-------|--------|
-| Traefik | http://traefik.docker.local:8080 | traefik:v2.10 | ✅ Setup Ready |
-| Dashy | http://dashy.docker.local | lissy93/dashy | ✅ Setup Ready |
-| IT-Tools | http://it-tools.docker.local | corentinth/it-tools | ✅ Setup Ready |
-| Planka | http://planka.docker.local | ghcr.io/plankanban/planka | ✅ Setup Ready |
-| Portainer | http://portainer.docker.local | portainer/portainer-ce | ✅ Setup Ready |
-| Private 1 | http://private-project-1.docker.local | your-image | 🔧 Template |
-| Private 2 | http://private-project-2.docker.local | your-image | 🔧 Template |
-| Private 3 | http://private-project-3.docker.local | your-image | 🔧 Template |
+| Traefik | http://traefik.docker.lan:8080 | traefik:v2.10 | ✅ Setup Ready |
+| Dashy | http://dashy.docker.lan | lissy93/dashy | ✅ Setup Ready |
+| IT-Tools | http://it-tools.docker.lan | corentinth/it-tools | ✅ Setup Ready |
+| Planka | http://planka.docker.lan | ghcr.io/plankanban/planka | ✅ Setup Ready |
+| Portainer | http://portainer.docker.lan | portainer/portainer-ce | ✅ Setup Ready |
+| Private 1 | http://private-project-1.docker.lan | your-image | 🔧 Template |
+| Private 2 | http://private-project-2.docker.lan | your-image | 🔧 Template |
+| Private 3 | http://private-project-3.docker.lan | your-image | 🔧 Template |
 
 ---
 
@@ -149,9 +149,9 @@ http://traefik.docker.local:8080
 
 - [ ] **QUICKSTART.md** gelesen? (5 Min)
 - [ ] **DNS konfiguriert**? (DNS_SETUP.md)
-- [ ] **Docker Network erstellt**? (`docker network create docker-local-network`)
+- [ ] **Docker Network erstellt**? (`docker network create docker_lan_network`)
 - [ ] **Traefik gestartet**? (`docker-compose up -d`)
-- [ ] **Erstes Projekt funktioniert**? (http://dashy.docker.local)
+- [ ] **Erstes Projekt funktioniert**? (http://dashy.docker.lan)
 - [ ] **README.md durchgelesen**? (für tieferes Verständnis)
 - [ ] **AGENTS.md studiert**? (für Verwaltungsaufgaben)
 

@@ -1,4 +1,4 @@
-# DNS-Konfiguration für .docker.local
+# DNS-Konfiguration für .docker.lan
 # ==================================
 
 ## Option 1: Windows Hosts-Datei (Recommended für Anfang)
@@ -19,15 +19,15 @@
 # ============================================
 # Docker Local Network
 # ============================================
-192.168.178.6  docker.local
-192.168.178.6  dashy.docker.local
-192.168.178.6  it-tools.docker.local
-192.168.178.6  planka.docker.local
-192.168.178.6  portainer.docker.local
-192.168.178.6  private-project-1.docker.local
-192.168.178.6  private-project-2.docker.local
-192.168.178.6  private-project-3.docker.local
-192.168.178.6  traefik.docker.local
+192.168.178.6  docker.lan
+192.168.178.6  dashy.docker.lan
+192.168.178.6  it-tools.docker.lan
+192.168.178.6  planka.docker.lan
+192.168.178.6  portainer.docker.lan
+192.168.178.6  private-project-1.docker.lan
+192.168.178.6  private-project-2.docker.lan
+192.168.178.6  private-project-3.docker.lan
+192.168.178.6  traefik.docker.lan
 ```
 
 4. **Speichern** (Ctrl+S)
@@ -39,8 +39,8 @@ ipconfig /flushdns
 
 6. **Testen**:
 ```
-ping dashy.docker.local
-nslookup dashy.docker.local
+ping dashy.docker.lan
+nslookup dashy.docker.lan
 ```
 
 ---
@@ -50,8 +50,8 @@ nslookup dashy.docker.local
 Wenn du viele neue Subdomains hinzufügst, verwende stattdessen einen Wildcard-Eintrag:
 
 ```hosts
-192.168.178.6  docker.local
-192.168.178.6  *.docker.local
+192.168.178.6  docker.lan
+192.168.178.6  *.docker.lan
 ```
 
 Das macht alle Subdomains automatisch verfügbar ohne einzelne Einträge.
@@ -69,8 +69,8 @@ apt-get install unbound
 
 # /etc/unbound/unbound.conf
 server:
-    local-data: "docker.local. IN A 192.168.178.6"
-    local-data: "*.docker.local. IN A 192.168.178.6"
+    local-data: "docker.lan. IN A 192.168.178.6"
+    local-data: "*.docker.lan. IN A 192.168.178.6"
 
 systemctl restart unbound
 ```
@@ -87,7 +87,7 @@ coredns:
   volumes:
     - ./dns/Corefile:/Corefile:ro
   networks:
-    - docker-local-network
+    - docker_lan_network
 ```
 
 Datei `dns/Corefile`:
@@ -97,7 +97,7 @@ Datei `dns/Corefile`:
     errors
     
     # Lokale Domain
-    file /etc/coredns/docker.local.zone docker.local
+    file /etc/coredns/docker.lan.zone docker.lan
     
     # Fallback auf öffentliche DNS
     forward . 8.8.8.8 8.8.4.4
@@ -133,7 +133,7 @@ Datei `dns/Corefile`:
    ```
 3. **Teste direkt am Host**:
    ```bash
-   curl http://traefik.docker.local:8080/dashboard/
+   curl http://traefik.docker.lan:8080/dashboard/
    ```
 
 ### "Neue Subdomains funktionieren nicht"
@@ -153,8 +153,8 @@ Datei `dns/Corefile`:
 - [ ] Hosts-Datei als Admin bearbeitet?
 - [ ] Einträge korrekt eingegeben?
 - [ ] DNS Cache geleert?
-- [ ] `ping dashy.docker.local` erfolgreich?
-- [ ] `curl http://dashy.docker.local` funktioniert?
+- [ ] `ping dashy.docker.lan` erfolgreich?
+- [ ] `curl http://dashy.docker.lan` funktioniert?
 - [ ] Traefik Container läuft? (`docker ps | grep traefik`)
 - [ ] Zielcontainer läuft? (`docker ps | grep dashy`)
 

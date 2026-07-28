@@ -1,33 +1,34 @@
 version: '3.8'
 
 services:
-  portainer:
-    image: portainer/portainer-ce:latest
-    container_name: portainer
-    restart: unless-stopped
-    networks:
-      - docker-local-network
-    # Portainer braucht Zugriff auf Docker Socket für Container-Management
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock:ro
-      - portainer-data:/data
-    environment:
-      - TZ=Europe/Berlin
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.portainer.rule=Host(`portainer.docker.local`)"
-      - "traefik.http.routers.portainer.entrypoints=web"
-      - "traefik.http.services.portainer.loadbalancer.server.port=9000"
-    logging:
-      driver: "json-file"
-      options:
-        max-size: "10m"
-        max-file: "3"
+    portainer:
+        image: portainer/portainer-ce:latest
+        container_name: portainer
+        restart: unless-stopped
+        networks:
+            - docker_lan_network
+        # Portainer braucht Zugriff auf Docker Socket für Container-Management
+        volumes:
+            - /var/run/docker.sock:/var/run/docker.sock:ro
+            - portainer-data:/data
+        environment:
+            - TZ=Europe/Berlin
+        labels:
+            - "traefik.enable=true"
+            - "traefik.docker.network=docker_lan_network"
+            - "traefik.http.routers.portainer.rule=Host(`portainer.docker.lan`)"
+            - "traefik.http.routers.portainer.entrypoints=web"
+            - "traefik.http.services.portainer.loadbalancer.server.port=9000"
+        logging:
+            driver: "json-file"
+            options:
+                max-size: "10m"
+                max-file: "3"
 
 volumes:
-  portainer-data:
+    portainer-data:
 
 networks:
-  docker-local-network:
-    external: true
+    docker_lan_network:
+        external: true
 

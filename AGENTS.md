@@ -21,7 +21,7 @@ Dieses Dokument definiert die Rollen und Verantwortlichkeiten für die Verwaltun
 ### Verantwortungen
 
 - ✅ Traefik Container Lifecycle (Start/Stop/Update)
-- ✅ Netzwerk-Konfiguration (`docker-local-network`)
+- ✅ Netzwerk-Konfiguration (`docker_lan_network`)
 - ✅ DNS-Einstellungen (Hosts-Datei oder DNS-Server)
 - ✅ Reverse Proxy Routing & Load Balancing
 - ✅ SSL/TLS Certificate Management
@@ -34,10 +34,10 @@ Dieses Dokument definiert die Rollen und Verantwortlichkeiten für die Verwaltun
 
 ```bash
 # 1. Netzwerk erstellen
-docker network create docker-local-network --driver bridge
+docker network create docker_lan_network --driver bridge
 
 # 2. Traefik starten
-cd /path/to/docker.local-netzwerk
+cd /path/to/docker.lan-netzwerk
 docker-compose up -d traefik
 
 # 3. Traefik Status prüfen
@@ -45,7 +45,7 @@ docker ps | grep traefik
 docker-compose logs traefik
 
 # 4. Dashboard verfügbar?
-curl http://traefik.docker.local:8080/dashboard/
+curl http://traefik.docker.lan:8080/dashboard/
 ```
 
 #### 📊 Regelmäßige Aufgaben (täglich/wöchentlich)
@@ -55,11 +55,11 @@ curl http://traefik.docker.local:8080/dashboard/
 docker-compose logs --tail 100 traefik
 
 # Netzwerk-Gesundheit prüfen
-docker network inspect docker-local-network
+docker network inspect docker_lan_network
 
 # Router & Services Status
-curl http://traefik.docker.local:8080/api/http/routers
-curl http://traefik.docker.local:8080/api/http/services
+curl http://traefik.docker.lan:8080/api/http/routers
+curl http://traefik.docker.lan:8080/api/http/services
 ```
 
 #### 🔄 Updates & Wartung
@@ -110,7 +110,7 @@ cd projects/mein-neues-projekt
 # - Image korrekt?
 # - Port korrekt?
 # - Labels mit Subdomain?
-# - Netzwerk: docker-local-network?
+# - Netzwerk: docker_lan_network?
 
 # 3. Abhängigkeiten checken
 # - Datenbaken? (separate Services)
@@ -122,7 +122,7 @@ docker-compose up -d
 docker-compose logs -f
 
 # 5. Von Host testen
-curl http://mein-projekt.docker.local
+curl http://mein-projekt.docker.lan
 
 # 6. In Dokumentation eintragen
 # - README.md aktualisieren
@@ -202,7 +202,7 @@ docker ps
 docker inspect container-name
 
 # 3. Netzwerk-Isolation prüfen
-docker network inspect docker-local-network
+docker network inspect docker_lan_network
 
 # 4. Passwörter & Secrets prüfen
 grep -r "password\|secret\|token" projects/
@@ -285,7 +285,7 @@ middlewares:
 ```bash
 # Tägliches Backup aller Projekt-Daten
 #!/bin/bash
-BACKUP_DIR="/backups/docker-local-network"
+BACKUP_DIR="/backups/docker_lan_network"
 DATE=$(date +%Y%m%d_%H%M%S)
 
 # Docker Volumes sichern
@@ -337,7 +337,7 @@ for dir in projects/*/; do
 done
 
 # 4. Netzwerk-Probleme?
-docker network inspect docker-local-network
+docker network inspect docker_lan_network
 ```
 
 #### 🐛 Debugging: Service antwortet nicht
@@ -382,14 +382,14 @@ prometheus:
   ports:
     - "9090:9090"
   networks:
-    - docker-local-network
+    - docker_lan_network
 
 grafana:
   image: grafana/grafana:latest
   ports:
     - "3000:3000"
   networks:
-    - docker-local-network
+    - docker_lan_network
 ```
 
 ---
@@ -417,7 +417,7 @@ grafana:
 Kurze Beschreibung der Anwendung
 
 ## Links
-- **Domain**: `http://[name].docker.local`
+- **Domain**: `http://[name].docker.lan`
 - **Image**: `image-registry/image:tag`
 - **GitHub**: [URL]
 

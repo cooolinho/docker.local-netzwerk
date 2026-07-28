@@ -21,9 +21,9 @@ cd "$SCRIPT_DIR"
 
 # 1. Prüfe, ob Netzwerk existiert
 echo -e "\n${YELLOW}[1/5] Prüfe Docker Network...${NC}"
-if ! docker network inspect docker-local-network > /dev/null 2>&1; then
-    echo -e "${YELLOW}Erstelle docker-local-network...${NC}"
-    docker network create docker-local-network --driver bridge
+if ! docker network inspect docker_lan_network > /dev/null 2>&1; then
+    echo -e "${YELLOW}Erstelle docker_lan_network...${NC}"
+    docker network create docker_lan_network --driver bridge
     echo -e "${GREEN}✓ Network erstellt${NC}"
 else
     echo -e "${GREEN}✓ Network existiert${NC}"
@@ -62,10 +62,10 @@ echo -e "${GREEN}================================================${NC}"
 
 # Zeige URLs
 echo -e "\n${BLUE}Verfügbare Services:${NC}"
-echo -e "  🏠 Dashy:            ${GREEN}http://dashy.docker.local${NC}"
-echo -e "  🛠️ IT-Tools:         ${GREEN}http://it-tools.docker.local${NC}"
-echo -e "  📋 Planka:           ${GREEN}http://planka.docker.local${NC}"
-echo -e "  🔍 Traefik Dashboard: ${GREEN}http://traefik.docker.local:8080${NC}"
+echo -e "  🏠 Dashy:            ${GREEN}http://dashy.docker.lan${NC}"
+echo -e "  🛠️ IT-Tools:         ${GREEN}http://it-tools.docker.lan${NC}"
+echo -e "  📋 Planka:           ${GREEN}http://planka.docker.lan${NC}"
+echo -e "  🔍 Traefik Dashboard: ${GREEN}http://traefik.docker.lan:8080${NC}"
 
 echo -e "\n${BLUE}Logs anzeigen:${NC}"
 echo -e "  docker-compose logs -f traefik"

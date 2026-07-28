@@ -4,7 +4,7 @@
 
 ### F: Warum brauche ich einen Reverse Proxy wie Traefik?
 
-**A:** Mit Traefik kannst du statt einzelne Container mit Ports aufzurufen (z.B. `docker.local:3000`, `docker.local:3001`), alle Services über aussagekräftige Subdomains erreichen (`dashy.docker.local`, `it-tools.docker.local`). Das ist:
+**A:** Mit Traefik kannst du statt einzelne Container mit Ports aufzurufen (z.B. `docker.lan:3000`, `docker.lan:3001`), alle Services über aussagekräftige Subdomains erreichen (`dashy.docker.lan`, `it-tools.docker.lan`). Das ist:
 - 👍 Benutzerfreundlicher
 - 👍 Professioneller
 - 👍 Leichter zu merken
@@ -25,7 +25,7 @@ Siehe [README.md - Sicherheit](./README.md#-sicherheit) für Details.
 
 ---
 
-### F: Was ist das "docker-local-network"?
+### F: Was ist das "docker_lan_network"?
 
 **A:** Ein Docker Bridge-Netzwerk, das alle Container verbindet:
 - Alle Container können sich untereinander über Containernamen erreichen
@@ -36,7 +36,7 @@ Siehe [README.md - Sicherheit](./README.md#-sicherheit) für Details.
 
 ## Häufige Probleme
 
-### F: "Verbindung verweigert" wenn ich http://dashy.docker.local aufrufe
+### F: "Verbindung verweigert" wenn ich http://dashy.docker.lan aufrufe
 
 **A:** Überprüfe in dieser Reihenfolge:
 
@@ -48,12 +48,12 @@ Siehe [README.md - Sicherheit](./README.md#-sicherheit) für Details.
 
 2. **Existiert das Netzwerk?**
    ```bash
-   docker network ls | grep docker-local-network
+   docker network ls | grep docker_lan_network
    ```
 
 3. **DNS funktioniert?**
    ```powershell
-   nslookup dashy.docker.local
+   nslookup dashy.docker.lan
    ```
 
 4. **Firewall blockt?**
@@ -69,7 +69,7 @@ Siehe [README.md - Sicherheit](./README.md#-sicherheit) für Details.
 
 1. **Hosts-Datei korrekt konfiguriert?**
    ```
-   192.168.178.6  dashy.docker.local
+   192.168.178.6  dashy.docker.lan
    ```
 
 2. **Als Administrator gespeichert?**
@@ -84,7 +84,7 @@ Siehe [README.md - Sicherheit](./README.md#-sicherheit) für Details.
 5. **Lokal auf VM getestet?**
    ```bash
    curl http://dashy:80  # oder die korrekte Port
-   curl http://traefik.docker.local:8080/dashboard/
+   curl http://traefik.docker.lan:8080/dashboard/
    ```
 
 ---
@@ -97,7 +97,7 @@ Siehe [README.md - Sicherheit](./README.md#-sicherheit) für Details.
 ```yaml
 labels:
   - "traefik.enable=true"
-  - "traefik.http.routers.dashy.rule=Host(`dashy.docker.local`)"
+  - "traefik.http.routers.dashy.rule=Host(`dashy.docker.lan`)"
   # Fehlt: die Service-Port-Definition!
 ```
 
@@ -105,7 +105,7 @@ labels:
 ```yaml
 labels:
   - "traefik.enable=true"
-  - "traefik.http.routers.dashy.rule=Host(`dashy.docker.local`)"
+  - "traefik.http.routers.dashy.rule=Host(`dashy.docker.lan`)"
   - "traefik.http.routers.dashy.entrypoints=web"
   - "traefik.http.services.dashy.loadbalancer.server.port=80"
 ```
@@ -114,11 +114,11 @@ labels:
 
 ### F: Container ist in einem anderen Netzwerk
 
-**A:** Alle Services müssen im `docker-local-network` sein:
+**A:** Alle Services müssen im `docker_lan_network` sein:
 
 ```yaml
 networks:
-  docker-local-network:
+  docker_lan_network:
     external: true
 ```
 
@@ -166,11 +166,11 @@ docker-compose up -d traefik
 
 ---
 
-### F: Wie nutze ich ein anderes Domain-Suffix statt ".docker.local"?
+### F: Wie nutze ich ein anderes Domain-Suffix statt ".docker.lan"?
 
 **A:** In `.env` ändern:
 ```env
-DOMAIN=mein.local  # statt docker.local
+DOMAIN=mein.local  # statt docker.lan
 ```
 
 Dann in `docker-compose.yml` der Projekte anpassen:
