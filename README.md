@@ -27,6 +27,7 @@ Diese Struktur ermöglicht es dir, mehrere Docker-Container über einen Reverse 
 - 📋 **Dozzle (Echtzeit Log-Viewer)**: `http://dozzle.docker.lan`
 - 📊 **Grafana (Log-Suche & Dashboards)**: `http://grafana.docker.lan`
 - 📧 **Roundcube (Webmail)**: `http://mail.docker.lan`
+- ☁️ **CloudBeaver (DB Web Client)**: `http://cloudbeaver.docker.lan`
 
 ## 🏗️ Architektur
 
@@ -74,6 +75,7 @@ Diese Struktur ermöglicht es dir, mehrere Docker-Container über einen Reverse 
 | **Dozzle** | `amir20/dozzle` | `dozzle.docker.lan` | 8080 | Echtzeit Container Log-Viewer |
 | **Grafana** | `grafana/grafana` | `grafana.docker.lan` | 3000 | Log-Suche & Dashboards (Loki) |
 | **Roundcube** | `roundcube/roundcubemail` | `mail.docker.lan` | 80 | Webmail (mit MariaDB im Mailserver-Stack) |
+| **CloudBeaver** | `dbeaver/cloudbeaver` | `cloudbeaver.docker.lan` | 8978 | Datenbank-Webclient (JDBC) |
 
 ## 🚀 Installation & Setup
 
@@ -174,6 +176,10 @@ cp .env.example .env
 # .env anpassen (IMAP/SMTP Host + DB Variablen)
 docker-compose up -d
 
+# CloudBeaver (DB Web Client)
+cd ../cloudbeaver
+docker-compose up -d
+
 # ... usw.
 ```
 
@@ -207,6 +213,7 @@ Falls AdGuard Home nicht verfügbar ist:
 192.168.178.6  dozzle.docker.lan
 192.168.178.6  grafana.docker.lan
 192.168.178.6  mail.docker.lan
+192.168.178.6  cloudbeaver.docker.lan
 ```
 
 > ⚠️ Hosts-Datei hat keinen Wildcard-Support — neue Projekte müssen manuell eingetragen werden.

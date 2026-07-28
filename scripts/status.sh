@@ -53,6 +53,7 @@ echo -e "  http://dashy.docker.lan"
 echo -e "  http://it-tools.docker.lan"
 echo -e "  http://planka.docker.lan"
 echo -e "  http://mail.docker.lan"
+echo -e "  http://cloudbeaver.docker.lan"
 echo -e "  http://traefik.docker.lan"
 
 echo -e "\n${BLUE}Commands:${NC}"

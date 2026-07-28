@@ -55,6 +55,7 @@ Diese Datei gibt dir einen Überblick über alle verfügbaren Dokumentationen un
 | [projects/dozzle/README.md](./projects/dozzle/README.md) | Echtzeit Log-Viewer | ✅ Ready |
 | [projects/logging/README.md](./projects/logging/README.md) | Loki + Promtail + Grafana (persistente Logs) | ✅ Ready |
 | [projects/mailserver/README.md](./projects/mailserver/README.md) | Mailserver-Stack mit Roundcube + MariaDB | ✅ Ready |
+| [projects/cloudbeaver/README.md](./projects/cloudbeaver/README.md) | Datenbank-Webclient (JDBC) | ✅ Ready |
 
 ### Projekt-Quickstarts
 
@@ -141,6 +142,9 @@ http://traefik.docker.lan
 
 # Roundcube Webmail
 http://mail.docker.lan
+
+# CloudBeaver
+http://cloudbeaver.docker.lan
 ```
 
 ---
@@ -157,6 +161,7 @@ http://mail.docker.lan
 | Dozzle | http://dozzle.docker.lan | amir20/dozzle | ✅ Setup Ready |
 | Grafana | http://grafana.docker.lan | grafana/grafana | ✅ Setup Ready |
 | Roundcube | http://mail.docker.lan | roundcube/roundcubemail | ✅ Setup Ready |
+| CloudBeaver | http://cloudbeaver.docker.lan | dbeaver/cloudbeaver | ✅ Setup Ready |
 
 ---
 

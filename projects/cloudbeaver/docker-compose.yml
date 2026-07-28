@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+    cloudbeaver:
+        image: dbeaver/cloudbeaver:latest
+        container_name: cloudbeaver
+        restart: unless-stopped
+        networks:
+            - docker_lan_network
+        volumes:
+            - cloudbeaver-workspace:/opt/cloudbeaver/workspace
+        labels:
+            - "traefik.enable=true"
+            - "traefik.docker.network=docker_lan_network"
+            - "traefik.http.routers.cloudbeaver.rule=Host(`cloudbeaver.docker.lan`)"
+            - "traefik.http.routers.cloudbeaver.entrypoints=web"
+            - "traefik.http.routers.cloudbeaver.middlewares=cloudbeaver-auth"
+            - "traefik.http.services.cloudbeaver.loadbalancer.server.port=8978"
+            - "traefik.http.middlewares.cloudbeaver-auth.basicauth.users=cloudadmin:$$apr1$$jGf5JsVY$$lm1h.grRIuQJO7nU69fiz/"
+        logging:
+            driver: "json-file"
+            options:
+                max-size: "10m"
+                max-file: "3"
+
+volumes:
+    cloudbeaver-workspace:
+
+networks:
+    docker_lan_network:
+        external: true
+

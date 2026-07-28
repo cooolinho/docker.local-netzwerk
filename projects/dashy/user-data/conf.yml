@@ -108,6 +108,14 @@ sections:
         id: app_roundcube
         statusCheck: true
         statusCheckUrl: http://monitor-api:monitor-readonly@traefik.docker.lan/api/http/services/roundcube%40docker
+      - title: CloudBeaver
+        description: Datenbank Management UI
+        url: http://cloudbeaver.docker.lan
+        icon: /cloudbeaver.png
+        target: newtab
+        id: app_cloudbeaver
+        statusCheck: true
+        statusCheckUrl: http://monitor-api:monitor-readonly@traefik.docker.lan/api/http/services/cloudbeaver%40docker
 
   - name: Private Projekte
     icon: fas fa-cube
