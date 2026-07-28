@@ -28,6 +28,13 @@ services:
             - "traefik.http.routers.traefik.service=api@internal"
             - "traefik.http.routers.traefik.middlewares=traefik-auth"
             - "traefik.http.middlewares.traefik-auth.basicauth.users=${TRAEFIK_DASHBOARD_USER}:$$apr1$$395SF7/r$$BvA3aWpIyQ0RSdFXRuRUE1"
+            # Read-only API for service status checks (GET /api/http/services/*)
+            - "traefik.http.routers.traefik-api-readonly.rule=Host(`traefik.${DOMAIN}`) && PathPrefix(`/api/http/services`) && Method(`GET`)"
+            - "traefik.http.routers.traefik-api-readonly.entrypoints=web"
+            - "traefik.http.routers.traefik-api-readonly.priority=200"
+            - "traefik.http.routers.traefik-api-readonly.service=api@internal"
+            - "traefik.http.routers.traefik-api-readonly.middlewares=traefik-api-readonly-auth"
+            - "traefik.http.middlewares.traefik-api-readonly-auth.basicauth.users=${TRAEFIK_API_MONITOR_USER:-monitor-api}:$$apr1$$SbYBr96F$$FB2EfgNHxFNUp0BwnZNlK1,${TRAEFIK_DASHBOARD_USER}:$$apr1$$395SF7/r$$BvA3aWpIyQ0RSdFXRuRUE1"
         logging:
             driver: "json-file"
             options:

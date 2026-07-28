@@ -35,6 +35,8 @@ sections:
         icon: fas fa-docker
         target: newtab
         id: infra_portainer
+        statusCheck: true
+        statusCheckUrl: http://monitor-api:monitor-readonly@traefik.docker.lan/api/http/services/portainer%40docker
       - title: Docker Host
         description: 192.168.178.6
         url: http://192.168.178.6
@@ -54,12 +56,16 @@ sections:
         icon: fas fa-tools
         target: newtab
         id: app_ittools
+        statusCheck: true
+        statusCheckUrl: http://monitor-api:monitor-readonly@traefik.docker.lan/api/http/services/it-tools%40docker
       - title: Planka
         description: Kanban Board
         url: http://planka.docker.lan
         icon: fas fa-chart-bar
         target: newtab
         id: app_planka
+        statusCheck: true
+        statusCheckUrl: http://monitor-api:monitor-readonly@traefik.docker.lan/api/http/services/planka%40docker
       - title: Private Projekt 1
         description: Dein Projekt
         url: http://private-project-1.docker.lan
@@ -78,6 +84,14 @@ sections:
         icon: fas fa-lock
         target: newtab
         id: app_private_3
+      - title: Dashy
+        description: Personal Dashboard
+        url: http://dashy.docker.lan
+        icon: fas fa-home
+        target: newtab
+        id: app_dashy
+        statusCheck: true
+        statusCheckUrl: http://monitor-api:monitor-readonly@traefik.docker.lan/api/http/services/dashy%40docker
 
   - name: Dokumentation
     icon: fas fa-book

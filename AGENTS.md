@@ -58,8 +58,10 @@ docker-compose logs --tail 100 traefik
 docker network inspect docker_lan_network
 
 # Router & Services Status
-curl http://traefik.docker.lan/api/http/routers
-curl http://traefik.docker.lan/api/http/services
+curl -u monitor-api:monitor-readonly http://traefik.docker.lan/api/http/services/dashy@docker
+curl -u monitor-api:monitor-readonly http://traefik.docker.lan/api/http/services/it-tools@docker
+curl -u monitor-api:monitor-readonly http://traefik.docker.lan/api/http/services/planka@docker
+curl -u monitor-api:monitor-readonly http://traefik.docker.lan/api/http/services/portainer@docker
 ```
 
 #### 🔄 Updates & Wartung

@@ -93,6 +93,8 @@ DOMAIN=docker.lan                           # Domain-Endung
 DOCKER_HOST=192.168.178.6                     # IP der VM
 TRAEFIK_DASHBOARD_USER=admin                  # Dashboard Benutzername
 TRAEFIK_DASHBOARD_PASSWORD=admin              # Dashboard Passwort
+TRAEFIK_API_MONITOR_USER=monitor-api          # Read-only API Benutzername
+TRAEFIK_API_MONITOR_PASSWORD=monitor-readonly # Read-only API Passwort
 ```
 
 ### 3. DNS-Konfiguration (AdGuard Home)
@@ -255,6 +257,21 @@ Hier siehst du:
 - ✅ Health Status
 - ✅ Request-Statistiken
 - ✅ Fehlerlog
+
+### Read-only API fuer Monitoring
+
+- **API-Basis**: `http://traefik.docker.lan/api`
+- **Scope**: Nur `GET /api/http/services/*` (read-only)
+- **Credentials**: `TRAEFIK_API_MONITOR_USER` / `TRAEFIK_API_MONITOR_PASSWORD`
+
+Beispiele fuer feste Service-IDs:
+
+```bash
+curl -u monitor-api:monitor-readonly http://traefik.docker.lan/api/http/services/dashy@docker
+curl -u monitor-api:monitor-readonly http://traefik.docker.lan/api/http/services/it-tools@docker
+curl -u monitor-api:monitor-readonly http://traefik.docker.lan/api/http/services/planka@docker
+curl -u monitor-api:monitor-readonly http://traefik.docker.lan/api/http/services/portainer@docker
+```
 
 ## ⚙️ Konfiguration
 
