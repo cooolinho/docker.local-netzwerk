@@ -1,0 +1,103 @@
+pageInfo:
+  title: Coding
+  description: Alles rund ums Goding
+  navLinks:
+    -   title: Dashy Docs
+        path: https://dashy.to/docs/
+sections:
+  - name: GitHub
+    displayData:
+      sortBy: default
+      rows: 1
+      cols: 1
+      collapsed: false
+      hideForGuests: false
+    items:
+      - title: GitHub
+        icon: hl-github
+        url: https://github.com/cooolinho
+        target: newtab
+        id: 0_579_github
+    widgets:
+      - type: github-profile-stats
+        options:
+          username: cooolinho
+          hideLanguagesCard: true
+        id: 0_579_githubprofilestats
+  - name: CodeStats
+    displayData:
+      sortBy: default
+      rows: 1
+      cols: 1
+      collapsed: false
+      hideForGuests: false
+    items:
+      - title: Code::Stats
+        icon: hl-codestats
+        url: https://codestats.net/users/cooolinho
+        target: newtab
+        id: 0_906_codestats
+      - title: Philip CS
+        icon: hl-codestats
+        url: https://codestats.net/users/kuro
+        target: newtab
+        id: 1_906_philipcs
+    widgets:
+      - type: code-stats
+        options:
+          username: cooolinho
+        id: 0_906_codestats
+  - name: Icons
+    displayData:
+      sortBy: default
+      rows: 1
+      cols: 1
+      collapsed: false
+      hideForGuests: false
+    items:
+      - title: Fontawesome
+        description: ''
+        icon: favicon
+        url: https://fontawesome.com/icons
+        target: newtab
+        id: 0_508_fontawesome
+      - title: Simpleicons
+        icon: favicon
+        url: https://simpleicons.org/
+        target: newtab
+        id: 1_508_simpleicons
+      - title: Emojipedia
+        description: ''
+        icon: favicon
+        url: https://emojipedia.org/
+        target: newtab
+        id: 2_508_emojipedia
+      - title: Homarr Labs
+        icon: hl-homarr
+        url: https://github.com/homarr-labs/dashboard-icons/blob/main/ICONS.md
+        id: 3_508_homarrlabs
+      - title: Material Design
+        icon: https://pictogrammers.com/images/libraries/mdi.svg
+        url: https://pictogrammers.com/library/mdi/
+        target: newtab
+        id: 4_508_materialdesign
+      - title: SVGBox
+        icon: https://svgbox.net/assets/favicon.svg
+        url: https://svgbox.net/iconsets/
+        target: newtab
+        id: 5_508_svgbox
+      - title: Icons8
+        icon: https://goodies.icons8.com/web/common/header/logo/logo-icons8.svg
+        url: https://icons8.com/
+        target: newtab
+        id: 6_508_icons
+      - title: Flaticon
+        icon: favicon
+        url: https://www.flaticon.com/
+        target: newtab
+        id: 7_508_flaticon
+      - title: SVGRepo
+        icon: favicon
+        url: https://www.svgrepo.com/
+        target: newtab
+        id: 8_508_svgrepo

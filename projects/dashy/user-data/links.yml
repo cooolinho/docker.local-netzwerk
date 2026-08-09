@@ -1,0 +1,17 @@
+pageInfo:
+    title: Link-Sammlung
+    navLinks:
+        - title: Dashy Docs
+          path: https://dashy.to/docs/
+sections:
+    - name: Infrastruktur
+      icon: fas fa-cogs
+      displayData:
+          sortBy: default
+          cols: 3
+      items:
+          - title: Home Assistant
+            description: Home Automation
+            url: http://homeassistant.lan
+            icon: /home-assistant.png
+            target: newtab

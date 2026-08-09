@@ -1,21 +1,16 @@
-# Dashy Config - Lokales Dashboard
-# https://dashy.to/docs/configuration
-
+appConfig:
+  theme: colorful
+  language: de
+  layout: masonry
+  iconSize: large
+  enableFontAwesome: true
+  colCount: 4
 pageInfo:
   title: Docker Local Network
   description: Zentrale Startseite fuer lokale Docker Services
   navLinks:
-    - title: Traefik Docs
-      path: https://doc.traefik.io/
-
-appConfig:
-  theme: material
-  language: de
-  layout: auto
-  iconSize: medium
-  enableFontAwesome: true
-  colCount: 4
-
+    - title: Dashy Docs
+      path: https://dashy.to/docs/
 sections:
   - name: Infrastruktur
     icon: fas fa-cogs
@@ -27,49 +22,37 @@ sections:
         description: Reverse Proxy Management
         url: http://traefik.docker.lan
         icon: /traefik.png
-        target: newtab
-        id: infra_traefik
         statusCheck: true
-        statusCheckUrl: http://monitor-api:monitor-readonly@traefik.docker.lan/api/http/services/traefik-dockerlocal-netzwerk%40docker
+        statusCheckUrl: >-
+          http://monitor-api:monitor-readonly@traefik.docker.lan/api/http/services/traefik-dockerlocal-netzwerk%40docker
       - title: Portainer
         description: Docker Management UI
         url: http://portainer.docker.lan
         icon: /portainer.jpg
-        target: newtab
-        id: infra_portainer
         statusCheck: true
-        statusCheckUrl: http://monitor-api:monitor-readonly@traefik.docker.lan/api/http/services/portainer%40docker
-      - title: Docker Host
-        description: 192.168.178.6
-        url: http://192.168.178.6
-        icon: fas fa-server
-        target: newtab
-        id: infra_host
+        statusCheckUrl: >-
+          http://monitor-api:monitor-readonly@traefik.docker.lan/api/http/services/portainer%40docker
       - title: Glances
         description: System Monitoring
         url: http://glances.docker.lan
         icon: /glances.png
-        target: newtab
-        id: infra_glances
         statusCheck: true
-        statusCheckUrl: http://monitor-api:monitor-readonly@traefik.docker.lan/api/http/services/glances%40docker
+        statusCheckUrl: >-
+          http://monitor-api:monitor-readonly@traefik.docker.lan/api/http/services/glances%40docker
       - title: Dozzle
         description: Echtzeit Container Log Viewer
         url: http://dozzle.docker.lan
         icon: /dozzle.png
-        target: newtab
-        id: infra_dozzle
         statusCheck: true
-        statusCheckUrl: http://monitor-api:monitor-readonly@traefik.docker.lan/api/http/services/dozzle%40docker
+        statusCheckUrl: >-
+          http://monitor-api:monitor-readonly@traefik.docker.lan/api/http/services/dozzle%40docker
       - title: Grafana
         description: Visualisierung & Log-Explorer
         url: http://grafana.docker.lan
         icon: /grafana.png
-        target: newtab
-        id: infra_grafana
         statusCheck: true
-        statusCheckUrl: http://monitor-api:monitor-readonly@traefik.docker.lan/api/http/services/grafana%40docker
-
+        statusCheckUrl: >-
+          http://monitor-api:monitor-readonly@traefik.docker.lan/api/http/services/grafana%40docker
   - name: Anwendungen
     icon: fas fa-cube
     displayData:
@@ -80,43 +63,38 @@ sections:
         description: Personal Dashboard
         url: http://dashy.docker.lan
         icon: /dashy.png
-        target: newtab
-        id: app_dashy
         statusCheck: true
-        statusCheckUrl: http://monitor-api:monitor-readonly@traefik.docker.lan/api/http/services/dashy%40docker
+        statusCheckUrl: >-
+          http://monitor-api:monitor-readonly@traefik.docker.lan/api/http/services/dashy%40docker
       - title: IT-Tools
         description: IT-Werkzeug-Sammlung
         url: http://it-tools.docker.lan
         icon: /it-tools.png
-        target: newtab
-        id: app_ittools
         statusCheck: true
-        statusCheckUrl: http://monitor-api:monitor-readonly@traefik.docker.lan/api/http/services/it-tools%40docker
+        statusCheckUrl: >-
+          http://monitor-api:monitor-readonly@traefik.docker.lan/api/http/services/it-tools%40docker
       - title: Planka
         description: Kanban Board
         url: http://planka.docker.lan
         icon: /planka.png
-        target: newtab
-        id: app_planka
         statusCheck: true
-        statusCheckUrl: http://monitor-api:monitor-readonly@traefik.docker.lan/api/http/services/planka%40docker
+        statusCheckUrl: >-
+          http://monitor-api:monitor-readonly@traefik.docker.lan/api/http/services/planka%40docker
       - title: Roundcube
         description: Webmail Client
         url: http://mail.docker.lan
         icon: /roundcube.jpg
         target: newtab
-        id: app_roundcube
         statusCheck: true
-        statusCheckUrl: http://monitor-api:monitor-readonly@traefik.docker.lan/api/http/services/roundcube%40docker
+        statusCheckUrl: >-
+          http://monitor-api:monitor-readonly@traefik.docker.lan/api/http/services/roundcube%40docker
       - title: CloudBeaver
         description: Datenbank Management UI
         url: http://cloudbeaver.docker.lan
         icon: /cloudbeaver.png
-        target: newtab
-        id: app_cloudbeaver
         statusCheck: true
-        statusCheckUrl: http://monitor-api:monitor-readonly@traefik.docker.lan/api/http/services/cloudbeaver%40docker
-
+        statusCheckUrl: >-
+          http://monitor-api:monitor-readonly@traefik.docker.lan/api/http/services/cloudbeaver%40docker
   - name: Private Projekte
     icon: fas fa-cube
     displayData:
@@ -124,14 +102,60 @@ sections:
       cols: 3
     items:
       - title: My Media Library
-        description: Dein Projekt
+        description: Verwaltung von Medien (Filme, Serien, Musik, etc.)
         url: http://my-media-library.docker.lan/admin
         icon: fas fa-lock
-        target: newtab
-        id: app_my_media_library
         statusCheck: true
-        statusCheckUrl: http://monitor-api:monitor-readonly@traefik.docker.lan/api/http/services/my-media-library%40docker
-
+        statusCheckUrl: >-
+          http://monitor-api:monitor-readonly@traefik.docker.lan/api/http/services/my-media-library%40docker
+      - title: Personal Home Portal
+        description: Verwaltung von Kosten, Verbrächen, Versicherungen, Verträgen, etc.
+        icon: fad fa-house
+        url: http://personal.docker.lan/admin
+        statusCheck: true
+        statusCheckUrl: >-
+          http://monitor-api:monitor-readonly@traefik.docker.lan/api/http/services/personal%40docker
+  - name: Mail-Accounts
+    icon: fas fa-envelope
+    displayData:
+      sortBy: default
+      cols: 3
+    items:
+      - title: mail@cooolinho.de
+        url: http://mail.docker.lan/?_user=mail@
+        icon: fas fa-lock
+        target: newtab
+      - title: dev-box1@cooolinho.de
+        url: http://mail.docker.lan/?_user=dev-box1@
+        icon: fas fa-lock
+      - title: dev-box2@cooolinho.de
+        url: http://mail.docker.lan/?_user=dev-box2@
+        icon: fas fa-lock
+        target: newtab
+      - title: dev-box3@cooolinho.de
+        url: http://mail.docker.lan/?_user=dev-box3@
+        icon: fas fa-lock
+        target: newtab
+      - title: personal-home-portal@cooolinho.de
+        url: http://mail.docker.lan/?_user=personal-home-portal@
+        icon: fas fa-lock
+        target: newtab
+      - title: diskstation@cooolinho.de
+        url: http://mail.docker.lan/?_user=diskstation@
+        icon: fas fa-lock
+        target: newtab
+      - title: docs@cooolinho.de
+        url: http://mail.docker.lan/?_user=docs@
+        icon: fas fa-lock
+        target: newtab
+      - title: karriere@cooolinho.de
+        url: http://mail.docker.lan/?_user=karriere@
+        icon: fas fa-lock
+        target: newtab
+      - title: marktausschuss@cooolinho.de
+        url: http://mail.docker.lan/?_user=marktausschuss@
+        icon: fas fa-lock
+        target: newtab
   - name: Dokumentation
     icon: fas fa-book
     displayData:
@@ -139,19 +163,32 @@ sections:
     items:
       - title: README
         description: Setup und Konfiguration
-        url: https://github.com/cooolinho/docker.local-netzwerk/blob/main/projects/dashy/README.md
+        url: >-
+          https://github.com/cooolinho/docker.local-netzwerk/blob/main/projects/dashy/README.md
         icon: fas fa-file-alt
-        id: docs_readme
       - title: Docker Compose
         description: Offizielle Doku
         url: https://docs.docker.com/compose/
         icon: fab fa-docker
         target: newtab
-        id: docs_compose
       - title: Traefik
         description: Reverse Proxy Doku
         url: https://doc.traefik.io/
         icon: fas fa-arrows-alt-v
         target: newtab
-        id: docs_traefik
-
+      - title: Dashy
+        description: Personal Dashboard Doku
+        url: https://dashy.to/docs/
+        icon: fas fa-columns
+        target: newtab
+pages:
+  - name: Link-Sammlung
+    path: 'links.yml'
+  - displayData:
+      hideForGuests: false
+    name: Coding
+    path: coding.yml
+  - displayData:
+      hideForGuests: false
+    name: AI Tools
+    path: ai.yml

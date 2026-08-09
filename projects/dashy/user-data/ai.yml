@@ -1,0 +1,322 @@
+pageInfo:
+  title: AI Tools
+  description: Nützliche KI-Tools für jeden Bereich
+  navLinks:
+    -   title: Dashy Docs
+        path: https://dashy.to/docs/
+sections:
+  - name: 💬 Chatbots & Assistenten
+    icon: fas fa-comments
+    displayData:
+      sortBy: default
+      collapsed: false
+      hideForGuests: false
+    items:
+      - title: ChatGPT
+        description: KI-Chatbot von OpenAI mit menschenähnlichen Antworten
+        icon: https://cdn.oaistatic.com/assets/favicon-o20kmmos.svg
+        url: https://chat.openai.com
+        target: newtab
+        id: 0_100_chatgpt
+      - title: Claude
+        description: KI-Assistent von Anthropic – sehr präzise und sicher
+        icon: https://claude.ai/favicon.ico
+#        icon: https://upload.wikimedia.org/wikipedia/commons/thumb/b/b0/Claude_AI_symbol.svg/1280px-Claude_AI_symbol.svg.png
+        url: https://claude.ai
+        target: newtab
+        id: 1_100_claude
+      - title: DeepSeek
+        description: Open-Source KI mit fortschrittlichem Reasoning
+        icon: https://chat.deepseek.com/favicon.ico
+        url: https://chat.deepseek.com
+        target: newtab
+        id: 2_100_deepseek
+      - title: Perplexity AI
+        description: KI-Suchmaschine mit Quellenangaben und Top-Modellen
+        icon: https://www.perplexity.ai/favicon.ico
+        url: https://www.perplexity.ai
+        target: newtab
+        id: 3_100_perplexity
+      - title: Mistral Le Chat
+        description: Schneller ChatGPT-Konkurrent aus Frankreich
+        icon: https://chat.mistral.ai/favicon.ico
+        url: https://chat.mistral.ai
+        target: newtab
+        id: 4_100_mistral
+      - title: Grok (xAI)
+        description: Freier ChatGPT-Konkurrent mit direkter X-Integration
+        icon: https://grok.com/favicon.ico
+        url: https://grok.com
+        target: newtab
+        id: 5_100_grok
+      - title: Google Gemini
+        description: Googles multimodaler KI-Assistent
+        icon: https://www.gstatic.com/lamda/images/gemini_favicon_f069958c85030456e93de685481c559f160ea06.svg
+        url: https://gemini.google.com
+        target: newtab
+        id: 6_100_gemini
+      - title: Meta AI
+        description: Kostenloser KI-Assistent von Meta, integriert in WhatsApp
+        icon: https://www.meta.ai/favicon.ico
+        url: https://www.meta.ai
+        target: newtab
+        id: 7_100_metaai
+
+  - name: 🎨 Bild- & Videogenerierung
+    icon: fas fa-image
+    displayData:
+      sortBy: default
+      collapsed: false
+      hideForGuests: false
+    items:
+      - title: Midjourney
+        description: Hochwertige KI-Bildgenerierung per Discord oder Web
+        icon: https://www.midjourney.com/favicon.ico
+        url: https://www.midjourney.com
+        target: newtab
+        id: 0_200_midjourney
+      - title: Stable Diffusion (DreamStudio)
+        description: Open-Source Text-zu-Bild KI-Modell
+        icon: https://dreamstudio.ai/favicon.ico
+        url: https://dreamstudio.ai
+        target: newtab
+        id: 1_200_stablediffusion
+      - title: DALL·E 3 (ChatGPT)
+        description: OpenAIs Bildgenerierung direkt in ChatGPT
+        icon: https://cdn.oaistatic.com/assets/favicon-o20kmmos.svg
+        url: https://chat.openai.com
+        target: newtab
+        id: 2_200_dalle
+      - title: Ideogram
+        description: KI-Bildgenerierung mit lesbarem Text in Bildern
+        icon: https://ideogram.ai/favicon.ico
+        url: https://ideogram.ai
+        target: newtab
+        id: 3_200_ideogram
+      - title: Adobe Firefly
+        description: KI-Bildgenerierung nahtlos in Adobe-Produkten integriert
+        icon: https://www.adobe.com/favicon.ico
+        url: https://firefly.adobe.com
+        target: newtab
+        id: 4_200_firefly
+      - title: Runway ML
+        description: KI-Videogenerierung und -bearbeitung für Kreative
+        icon: https://runwayml.com/favicon.ico
+        url: https://runwayml.com
+        target: newtab
+        id: 5_200_runway
+      - title: HeyGen
+        description: Realistische KI-Avatar-Klone und Videosynthese
+        icon: https://www.heygen.com/favicon.ico
+        url: https://www.heygen.com
+        target: newtab
+        id: 6_200_heygen
+      - title: Kling AI
+        description: Hochwertige KI-Videogenerierung aus Text oder Bild
+        icon: https://klingai.com/favicon.ico
+        url: https://klingai.com
+        target: newtab
+        id: 7_200_kling
+
+  - name: 🎵 Audio & Musik
+    icon: fas fa-music
+    displayData:
+      sortBy: default
+      collapsed: false
+      hideForGuests: false
+    items:
+      - title: Suno AI
+        description: Musik und Audio aus natürlichsprachigen Prompts generieren
+        icon: https://suno.com/favicon.ico
+        url: https://suno.com
+        target: newtab
+        id: 0_300_suno
+      - title: Udio
+        description: KI-Musikgenerierung in Studioqualität
+        icon: https://www.udio.com/favicon.ico
+        url: https://www.udio.com
+        target: newtab
+        id: 1_300_udio
+      - title: ElevenLabs
+        description: Menschenähnliche Sprachsynthese und Stimmklonung
+        icon: https://elevenlabs.io/favicon.ico
+        url: https://elevenlabs.io
+        target: newtab
+        id: 2_300_elevenlabs
+      - title: Murf AI
+        description: KI-Voiceover-Generator für Präsentationen und Videos
+        icon: https://murf.ai/favicon.ico
+        url: https://murf.ai
+        target: newtab
+        id: 3_300_murf
+
+  - name: 🚀 Produktivität & Automatisierung
+    icon: fas fa-bolt
+    displayData:
+      sortBy: default
+      collapsed: false
+      hideForGuests: false
+    items:
+      - title: Notion AI
+        description: KI-Produktivität direkt in deinen Notizen und Wikis
+        icon: https://www.notion.so/favicon.ico
+        url: https://www.notion.so
+        target: newtab
+        id: 0_400_notion
+      - title: Lindy AI
+        description: No-Code KI-Agenten-Builder für wiederkehrende Aufgaben
+        icon: https://www.lindy.ai/favicon.ico
+        url: https://www.lindy.ai
+        target: newtab
+        id: 1_400_lindy
+      - title: Zapier AI Agents
+        description: Wiederkehrende Aufgaben aus natürlicher Sprache automatisieren
+        icon: https://zapier.com/favicon.ico
+        url: https://zapier.com/agents
+        target: newtab
+        id: 2_400_zapier
+      - title: Make (Integromat)
+        description: Visuelle Automatisierungsplattform mit KI-Unterstützung
+        icon: https://www.make.com/favicon.ico
+        url: https://www.make.com
+        target: newtab
+        id: 3_400_make
+      - title: Gamma AI
+        description: PowerPoint-Präsentationen in Sekunden per KI erstellen
+        icon: https://gamma.app/favicon.ico
+        url: https://gamma.app
+        target: newtab
+        id: 4_400_gamma
+      - title: Otter.ai
+        description: KI-Transkription und Meeting-Zusammenfassungen
+        icon: https://otter.ai/favicon.ico
+        url: https://otter.ai
+        target: newtab
+        id: 5_400_otter
+      - title: Granola AI
+        description: Automatischer KI-Notizenersteller für Zoom-Meetings
+        icon: https://www.granola.ai/favicon.ico
+        url: https://www.granola.ai
+        target: newtab
+        id: 6_400_granola
+
+  - name: 💻 Coding & Entwicklung
+    icon: fas fa-code
+    displayData:
+      sortBy: default
+      collapsed: false
+      hideForGuests: false
+    items:
+      - title: GitHub Copilot
+        description: KI-Programmierassistent direkt im Code-Editor
+        icon: hl-github
+        url: https://github.com/features/copilot
+        target: newtab
+        id: 0_500_copilot
+      - title: Cursor
+        description: KI-first Code-Editor basierend auf VS Code
+        icon: https://cursor.sh/favicon.ico
+        url: https://cursor.sh
+        target: newtab
+        id: 1_500_cursor
+      - title: v0 by Vercel
+        description: KI-generierte React UI-Komponenten aus Text-Prompts
+        icon: https://v0.dev/favicon.ico
+        url: https://v0.dev
+        target: newtab
+        id: 2_500_v0
+      - title: Bolt.new
+        description: Full-Stack-Webanwendungen per KI im Browser entwickeln
+        icon: https://bolt.new/favicon.ico
+        url: https://bolt.new
+        target: newtab
+        id: 3_500_bolt
+      - title: Lovable
+        description: KI-gestützte Full-Stack-App-Entwicklung ohne Coding
+        icon: https://lovable.dev/favicon.ico
+        url: https://lovable.dev
+        target: newtab
+        id: 4_500_lovable
+      - title: Windsurf (Codeium)
+        description: KI-Code-Editor mit agentenbasierter Entwicklung
+        icon: https://codeium.com/favicon.ico
+        url: https://codeium.com/windsurf
+        target: newtab
+        id: 5_500_windsurf
+
+  - name: 🔬 Forschung & Wissen
+    icon: fas fa-flask
+    displayData:
+      sortBy: default
+      collapsed: false
+      hideForGuests: false
+    items:
+      - title: The Rundown AI
+        description: Das größte Hub für KI-News, Tools und Tutorials
+        icon: https://www.therundown.ai/favicon.ico
+        url: https://www.therundown.ai
+        target: newtab
+        id: 0_600_rundown
+      - title: HuggingFace
+        description: Open-Source-Community für KI-Modelle und Datensätze
+        icon: https://huggingface.co/favicon.ico
+        url: https://huggingface.co
+        target: newtab
+        id: 1_600_huggingface
+      - title: Papers With Code
+        description: KI-Forschungsarbeiten mit zugehörigem Quellcode
+        icon: https://paperswithcode.com/favicon.ico
+        url: https://paperswithcode.com
+        target: newtab
+        id: 2_600_paperswithcode
+      - title: Consensus
+        description: KI-gestützte Suche in wissenschaftlichen Studien
+        icon: https://consensus.app/favicon.ico
+        url: https://consensus.app
+        target: newtab
+        id: 3_600_consensus
+      - title: Elicit
+        description: KI-Forschungsassistent für wissenschaftliche Literatur
+        icon: https://elicit.com/favicon.ico
+        url: https://elicit.com
+        target: newtab
+        id: 4_600_elicit
+
+  - name: 🤖 KI-Agenten & Plattformen
+    icon: fas fa-robot
+    displayData:
+      sortBy: default
+      collapsed: false
+      hideForGuests: false
+    items:
+      - title: CrewAI
+        description: Automatisierte Workflows mit mehreren KI-Agenten erstellen
+        icon: https://www.crewai.com/favicon.ico
+        url: https://www.crewai.com
+        target: newtab
+        id: 0_700_crewai
+      - title: AutoGPT
+        description: Autonomer KI-Agent für komplexe mehrstufige Aufgaben
+        icon: https://agpt.co/favicon.ico
+        url: https://agpt.co
+        target: newtab
+        id: 1_700_autogpt
+      - title: LangChain
+        description: Framework zum Bauen von KI-Anwendungen mit LLMs
+        icon: https://www.langchain.com/favicon.ico
+        url: https://www.langchain.com
+        target: newtab
+        id: 2_700_langchain
+      - title: Flowise
+        description: Open-Source No-Code-Builder für LLM-Workflows
+        icon: https://flowiseai.com/favicon.ico
+        url: https://flowiseai.com
+        target: newtab
+        id: 3_700_flowise
+      - title: n8n AI
+        description: Open-Source-Automatisierungsplattform mit KI-Knoten
+        icon: hl-n8n
+        url: https://n8n.io
+        target: newtab
+        id: 4_700_n8n
+
