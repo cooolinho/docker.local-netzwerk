@@ -1,0 +1,7 @@
+# Backups sollten nicht ins Repository
+backups/
+*.tar.gz
+
+# Lokale Umgebungsvariablen
+.env.local
+

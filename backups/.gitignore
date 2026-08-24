@@ -1,0 +1,7 @@
+# Ignore all backup files
+*.sql
+*.tar.gz
+*.zip
+*.log
+!.gitignore
+

@@ -144,20 +144,54 @@ Dies erlaubt Portainer:
 
 ## 🔄 Backup & Restore
 
-### Backup
+### Mit dem Update-Script (empfohlen)
+
+Das `update.sh` Script kann vor dem Update automatisch ein Backup erstellen:
+
+```bash
+cd projects/portainer
+./update.sh --backup
+```
+
+Backups werden im `backups/`-Verzeichnis mit Datumsstempel gespeichert:
+```
+backups/
+├── portainer-backup-20240726_143022.tar.gz
+├── portainer-backup-20240727_120015.tar.gz
+└── portainer-backup-20240728_093045.tar.gz
+```
+
+### Manuelles Backup
 
 ```bash
 # Portainer-Daten sichern
 docker run --rm -v portainer-data:/data -v "$PWD":/backup \
   alpine tar czf /backup/portainer-backup.tar.gz /data
 
-# Mit Datumstempel
+# Mit Datumsstempel
 docker run --rm -v portainer-data:/data -v "$PWD":/backup \
-  alpine tar czf /backup/portainer-backup-$(date +%Y%m%d).tar.gz /data
+  alpine tar czf /backup/portainer-backup-$(date +%Y%m%d_%H%M%S).tar.gz /data
 ```
 
 ### Restore
 
+Falls etwas schiefgeht, gibt es zwei Optionen:
+
+**Mit Rollback-Script (empfohlen):**
+```bash
+cd projects/portainer
+
+# Verfügbare Backups anzeigen
+./rollback.sh --list
+
+# Neuestes Backup verwenden
+./rollback.sh --latest
+
+# Spezifisches Backup verwenden
+./rollback.sh portainer-backup-20240726_143022
+```
+
+**Manuelles Restore:**
 ```bash
 # Backup einspielen
 docker run --rm -v portainer-data:/data -v "$PWD":/backup \
@@ -165,6 +199,28 @@ docker run --rm -v portainer-data:/data -v "$PWD":/backup \
 
 # Container neustarten
 docker-compose restart portainer
+```
+
+### Automatische Backups (Cron-Job)
+
+Für regelmäßige automatische Backups kannst du einen Cron-Job einrichten:
+
+```bash
+# Crontab öffnen
+crontab -e
+
+# Tägliches Backup um 2:00 Uhr (alle 24 Stunden)
+0 2 * * * cd /path/to/projects/portainer && ./update.sh --backup > /dev/null 2>&1
+
+# Nur Backup erstellen (kein Update):
+0 2 * * * docker run --rm -v portainer-data:/data -v /path/to/projects/portainer/backups:/backup alpine tar czf /backup/portainer-backup-$(date +\%Y\%m\%d_\%H\%M\%S).tar.gz /data
+```
+
+### Alte Backups automatisch löschen
+
+```bash
+# Lösche Backups älter als 30 Tage
+find projects/portainer/backups -name "portainer-backup-*.tar.gz" -mtime +30 -delete
 ```
 
 ## 🐛 Troubleshooting
@@ -216,6 +272,10 @@ docker-compose config
 # 3. Volume-Berechtigungen prüfen
 docker volume ls | grep portainer
 docker volume inspect portainer-data
+
+# 4. Falls nach Update Fehler: Rollback durchführen
+cd projects/portainer
+./rollback.sh --latest
 ```
 
 ### ❌ Verbindung von außerhalb funktioniert nicht
@@ -226,7 +286,41 @@ docker volume inspect portainer-data
 
 ## 🔄 Update
 
+### Automatisch mit Update-Script (empfohlen)
+
+Das `update.sh` Script macht das Update sicherer mit integrierten Backups und Fehlerbehandlung:
+
 ```bash
+cd projects/portainer
+
+# Neueste Version installieren
+./update.sh
+
+# Spezifische Version installieren
+./update.sh 2.18.3
+
+# Mit Backup vor Update
+./update.sh --backup
+
+# Mit Backup und spezifischer Version
+./update.sh 2.18.3 --backup
+
+# Hilfe anzeigen
+./update.sh --help
+```
+
+**Voraussetzung**: Script-Ausführungsrecht
+```bash
+chmod +x projects/portainer/update.sh
+```
+
+### Manuell via docker-compose
+
+Falls das Script nicht verwendet werden soll:
+
+```bash
+cd projects/portainer
+
 # Neuestes Image pullen
 docker-compose pull portainer
 
@@ -237,6 +331,31 @@ docker-compose up -d
 # Logs anschauen
 docker-compose logs -f portainer
 ```
+
+### Verfügbare Versionen
+
+Alle verfügbaren Portainer CE Versionen findest du auf Docker Hub:
+https://hub.docker.com/r/portainer/portainer-ce/tags
+
+### Direkt in docker-compose.yml aktualisieren (alternativ)
+
+Falls du die Version direkt in der `docker-compose.yml` ändern möchtest:
+
+```yaml
+services:
+    portainer:
+        image: portainer/portainer-ce:2.18.3  # Version hier ändern
+        # ... rest config ...
+```
+
+Dann starten:
+```bash
+docker-compose down
+docker-compose pull
+docker-compose up -d
+```
+
+> **Tipp**: Das `update.sh` Script ist sicherer, da es automatisch Backups erstellen und Fehler besser handhaben kann.
 
 ## 📊 Tipps & Best Practices
 

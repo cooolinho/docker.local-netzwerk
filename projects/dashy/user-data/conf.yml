@@ -115,6 +115,13 @@ sections:
         statusCheck: true
         statusCheckUrl: >-
           http://monitor-api:monitor-readonly@traefik.docker.lan/api/http/services/personal%40docker
+      - title: Bewerbungs-Tool
+        description: Verwaltung von Bewerbungen, Lebensläufen, Anschreiben, etc.
+        icon: fad fa-file-signature
+        url: http://jobs.docker.lan/
+        statusCheck: true
+        statusCheckUrl: >-
+          http://monitor-api:monitor-readonly@traefik.docker.lan/api/http/services/jobs%40docker
   - name: Mail-Accounts
     icon: fas fa-envelope
     displayData:
@@ -146,6 +153,10 @@ sections:
         target: newtab
       - title: docs@cooolinho.de
         url: http://mail.docker.lan/?_user=docs@
+        icon: fas fa-lock
+        target: newtab
+      - title: jobs@cooolinho.de
+        url: http://mail.docker.lan/?_user=jobs@
         icon: fas fa-lock
         target: newtab
       - title: karriere@cooolinho.de

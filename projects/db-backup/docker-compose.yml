@@ -1,0 +1,30 @@
+services:
+    db-backup-runner:
+        container_name: db-backup-runner
+        build:
+            context: .
+            dockerfile: Dockerfile
+        restart: unless-stopped
+        working_dir: /workspace/docker.local-netzwerk
+        command: [ "cron", "-f" ]
+        environment:
+            BACKUP_CONFIG_DIR: /var/lib/db-backup/config
+        volumes:
+            - ../../:/workspace/docker.local-netzwerk
+            - /var/run/docker.sock:/var/run/docker.sock
+            - ./config:/var/lib/db-backup/config
+            - db-backup-cron:/var/spool/cron/crontabs
+        networks:
+            - docker_lan_network
+        logging:
+            driver: "json-file"
+            options:
+                max-size: "10m"
+                max-file: "3"
+
+networks:
+    docker_lan_network:
+        external: true
+
+volumes:
+    db-backup-cron:

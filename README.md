@@ -10,6 +10,7 @@ Lokale Docker-Umgebung mit Traefik als zentralem Reverse Proxy zur Verwaltung me
 - [Installation & Setup](#installation--setup)
 - [DNS-Konfiguration](#dns-konfiguration)
 - [Verwendung](#verwendung)
+- [Datenbank-Backups](#datenbank-backups)
 - [Private Projekte per Symlink](#private-projekte-per-symlink)
 - [Traefik Dashboard](#traefik-dashboard)
 - [Fehlerbehebung](#fehlerbehebung)
@@ -273,6 +274,61 @@ docker-compose -f projects/dashy/docker-compose.yml down
 docker-compose -f projects/dashy/docker-compose.yml up -d
 ```
 
+## 💾 Datenbank-Backups
+
+Alle Datenbanken in der Docker Local Network Infrastruktur können einfach mit dem Backup-Tool gesichert werden.
+
+### Schnelle Backups erstellen
+
+```bash
+# Backup-Runner bauen und starten (einmalig / bei Dockerfile-Änderungen)
+cd projects/db-backup
+docker-compose up -d --build
+
+# Interaktives Backup-Menü im Runner starten
+docker exec -it db-backup-runner bash -lc "cd /workspace/docker.local-netzwerk && bash scripts/backup_db.sh"
+
+# Automatisches Backup aus gespeicherten Credentials
+docker exec -it db-backup-runner bash -lc "cd /workspace/docker.local-netzwerk && bash scripts/backup_db.sh --auto"
+```
+
+> Hinweis: Dieser Runner ist fuer Datenbanken ohne veröffentlichte Host-Ports gedacht. Der Zugriff erfolgt intern über `docker_lan_network`.
+> Der Runner startet den Cron-Daemon automatisch. Cron-Konfigurationen werden persistent unter `projects/db-backup/config/` gespeichert und nicht in Git eingecheckt.
+
+Das Script unterstützt:
+- ✅ **PostgreSQL** (z.B. Planka, CloudBeaver)
+- ✅ **MySQL/MariaDB** (z.B. Roundcube)
+- ✅ **Automatische ZIP-Kompression** mit Zeitstempel
+- ✅ **Credential-Validierung** vor dem Backup
+- ✅ **Automatische Bereinigung** alter Backups
+
+### Automatische Backups mit Cron
+
+```bash
+# Cron-Job einrichten (interaktiv)
+docker exec -it db-backup-runner bash -lc "cd /workspace/docker.local-netzwerk && bash scripts/backup_db.sh --setup-cron"
+
+# Cron-Jobs verwalten
+docker exec -it db-backup-runner bash -lc "cd /workspace/docker.local-netzwerk && bash scripts/backup_db.sh --list-cron"      # Anzeigen
+docker exec -it db-backup-runner bash -lc "cd /workspace/docker.local-netzwerk && bash scripts/backup_db.sh --remove-cron"    # Entfernen
+```
+
+Bei `Setup Cron Job` wird ein laufender DB-Container ausgewählt. Fehlende Zugangsdaten aus der Projekt-`.env` werden einmalig abgefragt und in einer geschützten Config-Datei des ausgewählten Containers gespeichert. Jeder weitere Cron-Lauf verwendet diese Datei ohne erneute Eingabe.
+
+### Backup-Konfiguration
+
+```bash
+# Retention Period (Tage)
+BACKUP_RETENTION_DAYS=30
+
+# Cron Schedule (täglich 02:00 Uhr)
+BACKUP_SCHEDULE="0 2 * * *"
+```
+
+Die Zugangsdaten für Cron-Jobs werden getrennt davon pro DB-Container unter `projects/db-backup/config/` gespeichert.
+
+➡️ **Detaillierte Anleitung**: [BACKUP_STRATEGY.md](./BACKUP_STRATEGY.md)
+
 ## 🔗 Private Projekte per Symlink
 
 Der Ordner `projects/private` ist als Sammelpunkt fuer private, separat versionierte Projekte gedacht.
@@ -471,4 +527,3 @@ Siehe `AGENTS.md` für Rollen und Verantwortlichkeiten.
 **Traefik Version**: v2.10  
 **Docker Compose Version**: 3.8  
 **Logging-Stack**: Loki 3.5 + Promtail 3.5 + Grafana latest
-
