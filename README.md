@@ -29,6 +29,7 @@ Diese Struktur ermöglicht es dir, mehrere Docker-Container über einen Reverse 
 - 📊 **Grafana (Log-Suche & Dashboards)**: `http://grafana.docker.lan`
 - 📧 **Roundcube (Webmail)**: `http://mail.docker.lan`
 - ☁️ **CloudBeaver (DB Web Client)**: `http://cloudbeaver.docker.lan`
+- 🔀 **OmniRoute (AI Gateway & LLM Proxy)**: `http://omniroute.docker.lan`
 
 ## 🏗️ Architektur
 
@@ -77,6 +78,7 @@ Diese Struktur ermöglicht es dir, mehrere Docker-Container über einen Reverse 
 | **Grafana** | `grafana/grafana` | `grafana.docker.lan` | 3000 | Log-Suche & Dashboards (Loki) |
 | **Roundcube** | `roundcube/roundcubemail` | `mail.docker.lan` | 80 | Webmail (mit MariaDB im Mailserver-Stack) |
 | **CloudBeaver** | `dbeaver/cloudbeaver` | `cloudbeaver.docker.lan` | 8978 | Datenbank-Webclient (JDBC) |
+| **OmniRoute** | `diegosouzapw/omniroute` | `omniroute.docker.lan` | 20128 | Universal AI Gateway & LLM Proxy (Claude, Codex, OpenAI) |
 
 ## 🚀 Installation & Setup
 
@@ -241,7 +243,7 @@ Falls AdGuard Home nicht verfügbar ist:
          - docker_lan_network
        labels:
          - "traefik.enable=true"
-         - "traefik.http.routers.mein-projekt.rule=Host(`mein-projekt.docker.lan`)"
+         - "traefik.http.routers.mein-projekt.rule=Host(`mein-projekt.${TRAEFIK_DOMAIN}`)"
          - "traefik.http.routers.mein-projekt.entrypoints=web"
          - "traefik.http.services.mein-projekt.loadbalancer.server.port=3000"
 

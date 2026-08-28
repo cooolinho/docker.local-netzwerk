@@ -6,7 +6,7 @@ services:
         container_name: portainer
         restart: unless-stopped
         networks:
-            - docker_lan_network
+            - "${DOCKER_NETWORK}"
         # Portainer braucht Zugriff auf Docker Socket für Container-Management
         volumes:
             - /var/run/docker.sock:/var/run/docker.sock:ro
@@ -15,10 +15,10 @@ services:
             - TZ=Europe/Berlin
         labels:
             - "traefik.enable=true"
-            - "traefik.docker.network=docker_lan_network"
-            - "traefik.http.routers.portainer.rule=Host(`portainer.docker.lan`)"
-            - "traefik.http.routers.portainer.entrypoints=web"
-            - "traefik.http.services.portainer.loadbalancer.server.port=9000"
+            - "traefik.docker.network=${DOCKER_NETWORK}"
+            - "traefik.http.routers.${TRAEFIK_SERVICE_NAME}.rule=Host(`${TRAEFIK_SERVICE_NAME}.${TRAEFIK_DOMAIN}`)"
+            - "traefik.http.routers.${TRAEFIK_SERVICE_NAME}.entrypoints=web"
+            - "traefik.http.services.${TRAEFIK_SERVICE_NAME}.loadbalancer.server.port=${TRAEFIK_PORT:-9000}"
         logging:
             driver: "json-file"
             options:

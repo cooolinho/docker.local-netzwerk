@@ -6,7 +6,7 @@ services:
         container_name: dozzle
         restart: unless-stopped
         networks:
-            - docker_lan_network
+            - "${DOCKER_NETWORK}"
         environment:
             - TZ=Europe/Berlin
             - DOZZLE_AUTH_PROVIDER=simple
@@ -16,10 +16,10 @@ services:
             - ./data:/data
         labels:
             - "traefik.enable=true"
-            - "traefik.docker.network=docker_lan_network"
-            - "traefik.http.routers.dozzle.rule=Host(`dozzle.docker.lan`)"
-            - "traefik.http.routers.dozzle.entrypoints=web"
-            - "traefik.http.services.dozzle.loadbalancer.server.port=8080"
+            - "traefik.docker.network=${DOCKER_NETWORK}"
+            - "traefik.http.routers.${TRAEFIK_SERVICE_NAME}.rule=Host(`${TRAEFIK_SERVICE_NAME}.${TRAEFIK_DOMAIN}`)"
+            - "traefik.http.routers.${TRAEFIK_SERVICE_NAME}.entrypoints=web"
+            - "traefik.http.services.${TRAEFIK_SERVICE_NAME}.loadbalancer.server.port=${TRAEFIK_PORT:-8080}"
         logging:
             driver: "json-file"
             options:

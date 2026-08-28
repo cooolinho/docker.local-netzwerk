@@ -1,36 +1,34 @@
 version: '3.8'
 
 services:
-    dashy:
-        image: lissy93/dashy:latest
-        container_name: dashy
+    omniroute:
+        image: "diegosouzapw/omniroute:latest"
+        container_name: omniroute
         restart: unless-stopped
+        stop_grace_period: "40s"
         networks:
             - "${DOCKER_NETWORK}"
-        environment:
-            - TZ=Europe/Berlin
-            - NODE_ENV=production
         volumes:
-            - ./user-data:/app/user-data
+            - "omniroute-data:/app/data"
+        ports:
+            - "${TRAEFIK_PORT:-20128}:${PORT:-20128}"
+        env_file:
+            - .env
         labels:
             - "traefik.enable=true"
             - "traefik.docker.network=${DOCKER_NETWORK}"
             - "traefik.http.routers.${TRAEFIK_SERVICE_NAME}.rule=Host(`${TRAEFIK_SERVICE_NAME}.${TRAEFIK_DOMAIN}`)"
             - "traefik.http.routers.${TRAEFIK_SERVICE_NAME}.entrypoints=web"
-            - "traefik.http.services.${TRAEFIK_SERVICE_NAME}.loadbalancer.server.port=${TRAEFIK_PORT:-8080}"
+            - "traefik.http.services.${TRAEFIK_SERVICE_NAME}.loadbalancer.server.port=${TRAEFIK_PORT:-20128}"
         logging:
             driver: "json-file"
             options:
                 max-size: "10m"
                 max-file: "3"
-        healthcheck:
-            test: [ 'CMD', 'node', '/app/services/healthcheck.js' ]
-            interval: 1m30s
-            timeout: 10s
-            retries: 3
-            start_period: 30s
+
+volumes:
+    omniroute-data:
 
 networks:
     docker_lan_network:
         external: true
-

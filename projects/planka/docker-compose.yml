@@ -6,7 +6,7 @@ services:
         container_name: planka-db
         restart: unless-stopped
         networks:
-            - docker_lan_network
+            - "${DOCKER_NETWORK}"
         environment:
             POSTGRES_DB: planka
             POSTGRES_USER: planka
@@ -30,7 +30,7 @@ services:
         container_name: planka
         restart: unless-stopped
         networks:
-            - docker_lan_network
+            - "${DOCKER_NETWORK}"
         environment:
             BASE_URL: http://planka.docker.lan
             DATABASE_URL: postgresql://planka:planka-password-change-me@planka-db:5432/planka
@@ -44,10 +44,10 @@ services:
             - planka-project-background-images:/app/public/project-background-images
         labels:
             - "traefik.enable=true"
-            - "traefik.docker.network=docker_lan_network"
-            - "traefik.http.routers.planka.rule=Host(`planka.docker.lan`)"
-            - "traefik.http.routers.planka.entrypoints=web"
-            - "traefik.http.services.planka.loadbalancer.server.port=1337"
+            - "traefik.docker.network=${DOCKER_NETWORK}"
+            - "traefik.http.routers.${TRAEFIK_SERVICE_NAME}.rule=Host(`${TRAEFIK_SERVICE_NAME}.${TRAEFIK_DOMAIN}`)"
+            - "traefik.http.routers.${TRAEFIK_SERVICE_NAME}.entrypoints=web"
+            - "traefik.http.services.${TRAEFIK_SERVICE_NAME}.loadbalancer.server.port=${TRAEFIK_PORT:-1337}"
         logging:
             driver: "json-file"
             options:

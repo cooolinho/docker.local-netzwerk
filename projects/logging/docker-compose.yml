@@ -10,7 +10,7 @@ services:
         container_name: loki
         restart: unless-stopped
         networks:
-            - docker_lan_network
+            - "${DOCKER_NETWORK}"
         command: -config.file=/etc/loki/loki.yml
         volumes:
             - ./config/loki.yml:/etc/loki/loki.yml:ro
@@ -36,7 +36,7 @@ services:
         container_name: promtail
         restart: unless-stopped
         networks:
-            - docker_lan_network
+            - "${DOCKER_NETWORK}"
         command: -config.file=/etc/promtail/promtail.yml
         volumes:
             - ./config/promtail.yml:/etc/promtail/promtail.yml:ro
@@ -61,7 +61,7 @@ services:
         container_name: grafana
         restart: unless-stopped
         networks:
-            - docker_lan_network
+            - "${DOCKER_NETWORK}"
         environment:
             - TZ=${TZ:-Europe/Berlin}
             - GF_SECURITY_ADMIN_USER=${GF_SECURITY_ADMIN_USER:-admin}
@@ -81,10 +81,10 @@ services:
             - ./config/grafana/provisioning:/etc/grafana/provisioning:ro
         labels:
             - "traefik.enable=true"
-            - "traefik.docker.network=docker_lan_network"
-            - "traefik.http.routers.grafana.rule=Host(`grafana.docker.lan`)"
-            - "traefik.http.routers.grafana.entrypoints=web"
-            - "traefik.http.services.grafana.loadbalancer.server.port=3000"
+            - "traefik.docker.network=${DOCKER_NETWORK}"
+            - "traefik.http.routers.${TRAEFIK_SERVICE_NAME}.rule=Host(`${TRAEFIK_SERVICE_NAME}.${TRAEFIK_DOMAIN}`)"
+            - "traefik.http.routers.${TRAEFIK_SERVICE_NAME}.entrypoints=web"
+            - "traefik.http.services.${TRAEFIK_SERVICE_NAME}.loadbalancer.server.port=${TRAEFIK_PORT:-3000}"
         depends_on:
             loki:
                 condition: service_healthy

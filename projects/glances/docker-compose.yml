@@ -15,12 +15,13 @@ services:
         restart: unless-stopped
         container_name: glances
         networks:
-            - docker_lan_network
+            - "${DOCKER_NETWORK}"
         labels:
             - "traefik.enable=true"
-            - "traefik.http.routers.glances.rule=Host(`glances.docker.lan`)"
-            - "traefik.http.routers.glances.entrypoints=web"
-            - "traefik.http.services.glances.loadbalancer.server.port=61208"
+            - "traefik.docker.network=${DOCKER_NETWORK}"
+            - "traefik.http.routers.${TRAEFIK_SERVICE_NAME}.rule=Host(`${TRAEFIK_SERVICE_NAME}.${TRAEFIK_DOMAIN}`)"
+            - "traefik.http.routers.${TRAEFIK_SERVICE_NAME}.entrypoints=web"
+            - "traefik.http.services.${TRAEFIK_SERVICE_NAME}.loadbalancer.server.port=${TRAEFIK_PORT:-61208}"
 
 networks:
     docker_lan_network:

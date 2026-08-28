@@ -97,7 +97,7 @@ Siehe [README.md - Sicherheit](./README.md#-sicherheit) für Details.
 ```yaml
 labels:
   - "traefik.enable=true"
-  - "traefik.http.routers.dashy.rule=Host(`dashy.docker.lan`)"
+  - "traefik.http.routers.dashy.rule=Host(`dashy.${TRAEFIK_DOMAIN}`)"
   # Fehlt: die Service-Port-Definition!
 ```
 
@@ -105,7 +105,7 @@ labels:
 ```yaml
 labels:
   - "traefik.enable=true"
-  - "traefik.http.routers.dashy.rule=Host(`dashy.docker.lan`)"
+  - "traefik.http.routers.dashy.rule=Host(`dashy.${TRAEFIK_DOMAIN}`)"
   - "traefik.http.routers.dashy.entrypoints=web"
   - "traefik.http.services.dashy.loadbalancer.server.port=80"
 ```
@@ -175,7 +175,7 @@ DOMAIN=mein.local  # statt docker.lan
 
 Dann in `docker-compose.yml` der Projekte anpassen:
 ```yaml
-- "traefik.http.routers.dashy.rule=Host(`dashy.${DOMAIN}`)"
+- "traefik.http.routers.dashy.rule=Host(`dashy.${TRAEFIK_DOMAIN}`)"
 ```
 
 Und Hosts-Datei aktualisieren:
